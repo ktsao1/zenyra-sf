@@ -12,7 +12,7 @@ Most current customers are Chinese speakers; the studio wants to grow an English
 
 ## Stack
 
-Plain static HTML/CSS/JS, no build step. Git repo: `ktsao1/zenyra-sf` on GitHub (branch `main`). Preview from this folder with caching off, so a refresh always shows the current pages (plain `python3 -m http.server` lets Chrome reuse stale copies, which once made the nav look broken):
+Plain static HTML/CSS/JS, no build step. Git repo: `ktsao1/zenyra-sf` on GitHub (branch `main`); every push to `main` republishes the GitHub Pages preview at https://ktsao1.github.io/zenyra-sf/. Preview from this folder with caching off, so a refresh always shows the current pages (plain `python3 -m http.server` lets Chrome reuse stale copies, which once made the nav look broken):
 
 ```bash
 python3 -c 'import http.server as h
