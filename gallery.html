@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.galTitle">Gallery — Inside Zenyra San Francisco</title>
+  <meta name="description" data-i18n-content="meta.galDescription" content="Photos and video from inside Zenyra’s Sunset District wellness studio: treatment rooms, the butterfly wall, and community moments.">
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="i18n.js"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="common.skip">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Zenyra San Francisco home">
+      <img src="assets/images/zenyra-icon.png" alt="" width="44" height="44">
+      <span class="brand-name">ZENYRA<small>悠然美 · San Francisco</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary" data-i18n-aria="common.navLabel">
+      <a href="index.html#services" data-i18n="nav.services">Services</a>
+      <a href="index.html#membership" data-i18n="nav.membership">Membership</a>
+      <a href="index.html#about" data-i18n="nav.about">About</a>
+      <a href="gallery.html" aria-current="page" data-i18n="nav.gallery">Gallery</a>
+      <a href="index.html#visit" data-i18n="nav.visit">Visit</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang-switch="en" lang="en">EN</button>
+        <button type="button" data-lang-switch="zh" lang="zh-Hans">中文</button>
+      </div>
+      <a class="button button--small" href="https://zenyra-book.mase.cloud/" target="_blank" rel="noopener" data-book data-i18n="cta.bookShort">Book</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-i18n="common.menu">Menu</button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+      <a href="index.html#services" data-i18n="nav.services">Services</a>
+      <a href="index.html#membership" data-i18n="nav.membership">Membership</a>
+      <a href="index.html#about" data-i18n="nav.about">About</a>
+      <a href="gallery.html" aria-current="page" data-i18n="nav.gallery">Gallery</a>
+      <a href="index.html#visit" data-i18n="nav.visit">Visit</a>
+      <a class="button" href="index.html#begin" data-i18n="cta.bookFirst">Book your first visit</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-hero shell">
+      <div>
+        <h1 data-i18n="gal.title" data-i18n-rich>A real place, shaped by <span class="hl">care</span>.</h1>
+      </div>
+      <p class="lede" data-i18n="gal.lede">The rooms, details, and community moments that make Zenyra feel like Zenyra.</p>
+    </section>
+
+    <div class="filters shell" role="group" aria-label="Filter gallery" data-i18n-aria="gal.filterLabel">
+      <button type="button" data-filter="all" aria-pressed="true" data-i18n="gal.all">All</button>
+      <button type="button" data-filter="space" aria-pressed="false" data-i18n="gal.space">The space</button>
+      <button type="button" data-filter="community" aria-pressed="false" data-i18n="gal.community">Community</button>
+      <button type="button" data-filter="recognition" aria-pressed="false" data-i18n="gal.recognition">Recognition</button>
+    </div>
+
+    <section class="gallery shell" aria-label="Photos" data-i18n-aria="gal.gridLabel">
+      <figure class="g-item g-item--tall" data-cat="space">
+        <video controls playsinline preload="none" poster="assets/images/sunset-wellness-video-poster.jpg" aria-label="Video tour of Zenyra" data-i18n-aria="home.videoLabel"><source src="assets/video/sunset-story.mp4" type="video/mp4"></video>
+        <figcaption data-i18n="gal.c.video">Video tour · 0:32</figcaption>
+      </figure>
+      <figure class="g-item g-item--wide" data-cat="space"><button type="button" data-lightbox="assets/images/butterfly-feature-wall.webp"><img src="assets/images/butterfly-feature-wall.webp" alt="The butterfly wall glowing blue around the 悠然美 sign" width="2000" height="1500" loading="lazy"></button><figcaption data-i18n="gal.c.butterfly">The butterfly wall</figcaption></figure>
+      <figure class="g-item" data-cat="space"><button type="button" data-lightbox="assets/images/treatment-room-wide.webp"><img src="assets/images/treatment-room-wide.webp" alt="Treatment room under aqua and cream ceiling drapery" width="2000" height="1500" loading="lazy"></button><figcaption data-i18n="gal.c.room">Treatment room</figcaption></figure>
+      <figure class="g-item g-item--tall" data-cat="space"><button type="button" data-lightbox="assets/images/treatment-room-soft.webp"><img src="assets/images/treatment-room-soft.webp" alt="Softly lit private treatment room" width="1500" height="2000" loading="lazy"></button><figcaption data-i18n="gal.c.private">A private room to exhale</figcaption></figure>
+      <figure class="g-item" data-cat="space"><button type="button" data-lightbox="assets/images/wellness-capsule-room.webp"><img src="assets/images/wellness-capsule-room.webp" alt="Wellness capsule room" width="1477" height="1108" loading="lazy"></button><figcaption data-i18n="gal.c.capsule">The Energy 360 capsule</figcaption></figure>
+      <figure class="g-item g-item--tall" data-cat="community"><button type="button" data-lightbox="assets/images/ellaine-community-host.webp"><img src="assets/images/ellaine-community-host.webp" alt="Ellaine serving cupcakes at a community event" width="1500" height="2000" loading="lazy"></button><figcaption data-i18n="gal.c.ellaine">Hosted by Ellaine</figcaption></figure>
+      <figure class="g-item" data-cat="space"><button type="button" data-lightbox="assets/images/reception-area.webp"><img src="assets/images/reception-area.webp" alt="Reception area with aqua curtains and plants" width="1477" height="1108" loading="lazy"></button><figcaption data-i18n="gal.c.reception">Reception</figcaption></figure>
+      <figure class="g-item" data-cat="space community"><button type="button" data-lightbox="assets/images/retail-and-community-space.webp"><img src="assets/images/retail-and-community-space.webp" alt="Wood shelves and teal panels in the welcome area" width="2000" height="1500" loading="lazy"></button><figcaption data-i18n="gal.c.retail">Products &amp; welcome area</figcaption></figure>
+      <figure class="g-item g-item--tall" data-cat="space"><button type="button" data-lightbox="assets/images/window-wellness-seat.webp"><img src="assets/images/window-wellness-seat.webp" alt="Quiet window seat with aqua curtain" width="1108" height="1477" loading="lazy"></button><figcaption data-i18n="gal.c.window">A quiet corner</figcaption></figure>
+      <figure class="g-item" data-cat="space"><button type="button" data-lightbox="assets/images/wellness-capsule-detail.webp"><img src="assets/images/wellness-capsule-detail.webp" alt="Close view of a wellness capsule" width="1477" height="1108" loading="lazy"></button><figcaption data-i18n="gal.c.detail">Smart equipment</figcaption></figure>
+      <figure class="g-item g-item--tall" data-cat="space"><button type="button" data-lightbox="assets/images/butterfly-alcove.webp"><img src="assets/images/butterfly-alcove.webp" alt="Butterfly installation beside a consultation desk" width="1108" height="1477" loading="lazy"></button><figcaption data-i18n="gal.c.alcove">Consultation alcove</figcaption></figure>
+      <figure class="g-item g-item--tall" data-cat="space"><button type="button" data-lightbox="assets/images/storefront.webp"><img src="assets/images/storefront.webp" alt="Street entrance on Noriega Street" width="1500" height="2000" loading="lazy"></button><figcaption data-i18n="gal.c.storefront">Find us on Noriega St</figcaption></figure>
+      <figure class="g-item g-item--tall" data-cat="recognition"><button type="button" data-lightbox="assets/images/recognition-wall.webp"><img src="assets/images/recognition-wall.webp" alt="Wall of certificates and community recognitions" width="1108" height="1477" loading="lazy"></button><figcaption data-i18n="gal.c.wall">Years of recognition</figcaption></figure>
+      <figure class="g-item" data-cat="recognition"><button type="button" data-lightbox="assets/images/certificate-of-honor.webp"><img src="assets/images/certificate-of-honor.webp" alt="Certificate of Honor from the SF Board of Supervisors" width="1477" height="1108" loading="lazy"></button><figcaption data-i18n="rec.1">Certificate of Honor</figcaption></figure>
+      <figure class="g-item" data-cat="recognition"><button type="button" data-lightbox="assets/images/sing-tao-coverage.webp"><img src="assets/images/sing-tao-coverage.webp" alt="Sing Tao Daily feature about Zenyra" width="1477" height="1108" loading="lazy"></button><figcaption data-i18n="rec.5">Featured in the press</figcaption></figure>
+      <figure class="g-item" data-cat="recognition"><button type="button" data-lightbox="assets/images/community-appreciation-elaine.webp"><img src="assets/images/community-appreciation-elaine.webp" alt="Certificate of Appreciation presented to Ellaine Luo" width="1477" height="1108" loading="lazy"></button><figcaption data-i18n="rec.4">Certificate of Appreciation</figcaption></figure>
+    </section>
+
+    <section class="cta-band shell">
+      <h2 data-i18n="gal.ctaTitle">See it in person.</h2>
+      <a class="button" href="index.html#begin" data-i18n="cta.bookFirst">Book your first visit</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/zenyra-icon.png" alt="" width="56" height="56">
+        <p data-i18n="footer.line">Care that feels personal. Community that feels local.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer" data-i18n-aria="common.footerNav">
+        <a href="index.html#services" data-i18n="nav.services">Services</a>
+        <a href="index.html#membership" data-i18n="nav.membership">Membership</a>
+        <a href="gallery.html" data-i18n="nav.gallery">Gallery</a>
+        <a href="index.html#visit" data-i18n="nav.visit">Visit</a>
+      </nav>
+      <p class="footer-meta"><span>2560 Noriega St, San Francisco · (415) 712-4366</span><span>© <span data-year></span> Zenyra San Francisco · <span data-i18n="footer.notMedical">Wellness guidance is not medical advice.</span></span></p>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" data-lightbox-dialog>
+    <button class="lightbox-close" type="button" data-lightbox-close data-i18n="common.close">Close</button>
+    <img src="assets/images/treatment-room-wide.webp" alt="" data-lightbox-img>
+    <p data-lightbox-caption></p>
+  </dialog>
+</body>
+</html>

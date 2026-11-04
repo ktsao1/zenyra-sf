@@ -1,0 +1,450 @@
+/* PROTOTYPE · "Host at the window" home page (Figma 2NXIyQA6Cl9FeZXKDOeJse, node 71:1654).
+   Loaded after styles.css and only by index.html (the home): it reuses every token there and adds the layout.
+   Type, the language switch and the Visit details follow DESIGN.md / styles.css as they are
+   (the h1 is the sans display statement; serif only for h2s and the footer line). The one structural
+   departure kept from the frame is the split hero with a full-bleed photo.
+   Reworked 2026-11-04: the hero is a calm welcome (book, or go to the advisor), and the advisor lives in
+   "Three ways to begin" beside booking online and calling. */
+
+.host-page {
+  --host-edge: max(var(--gutter), (100vw - var(--content)) / 2);
+  /* Polish pass: more air between bands, and one slow, confident curve for everything that arrives. */
+  --section: clamp(5rem, 10vw, 8.5rem);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --card-pad: clamp(1.75rem, 3vw, 2.5rem);
+  caret-color: var(--teal-deep);
+  accent-color: var(--teal-deep);
+}
+
+/* ---------- Finish: the browser's own surfaces carry the palette too. ---------- */
+html:has(.host-page) { scrollbar-color: var(--line-strong) var(--paper); }
+.host-page ::selection { background: color-mix(in srgb, var(--teal) 22%, transparent); color: var(--ink); }
+.host-page :focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 3px; }
+.host-page :is(.button, .host-chips button, .am-replies button, .composer-send, .lang-switch button) {
+  transition: background-color 300ms var(--ease-out), border-color 300ms var(--ease-out), color 300ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.host-page :is(.button, .host-chips button, .am-replies button:not(:disabled), .composer-send):active { transform: scale(.97); }
+.host-page .button { letter-spacing: -.01em; }
+
+/* Nav: a hairline draws in under the link you point at, instead of a colour jump. */
+.host-page .site-nav a {
+  background: linear-gradient(var(--teal), var(--teal)) left calc(100% - .55rem) / 0 1px no-repeat;
+  transition: color 300ms var(--ease-out), background-size 450ms var(--ease-out);
+}
+.host-page .site-nav a:hover, .host-page .site-nav a:focus-visible { background-size: 100% 1px; }
+
+/* Photographs are unveiled once as they come into view (home-host.js adds .is-veiled only to photos still
+   below the fold, and only with motion allowed): the mask rises off the picture as it settles from a
+   slight zoom. It is the same clip-path material the advisor module opens with. */
+[data-reveal] { overflow: hidden; transition: clip-path 1300ms var(--ease-out); clip-path: inset(0 0 0 0); }
+[data-reveal] img { transition: transform 1800ms var(--ease-out), opacity 700ms var(--ease-out); }
+[data-reveal].is-veiled { clip-path: inset(100% 0 0 0); }
+[data-reveal].is-veiled img { transform: scale(1.08); }
+
+/* Shared heads: serif h2 with one teal phrase, then a lede. No kicker pill: the heading names the section
+   (removed in the distill pass, Kevin 2026-11-04; DESIGN.md records it). */
+.host-head { display: grid; justify-items: start; }
+.host-head p { margin-top: 1.25rem; font-size: 1.15rem; line-height: 1.55; color: var(--ink-soft); max-width: 36rem; }
+.host-head p, .host-lede, .service-rows span span { text-wrap: pretty; }
+.host-head--center p { text-wrap: balance; }
+.host-head--center { max-width: 46rem; margin: 0 auto clamp(2.5rem, 5vw, 4rem); text-align: center; justify-items: center; }
+.host-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ---------- Hero: centred text over a slow drift of colour; the photograph peeks in at the foot of the first
+   screen (--peek of it shows) and straddles the top of the cream band that "Three ways to begin" continues. ---------- */
+.host-hero {
+  --peek: clamp(7rem, 16vh, 11rem);
+  position: relative; isolation: isolate; overflow: hidden;
+  background: linear-gradient(var(--paper) calc(100% - 14rem), var(--cream) 0);
+}
+.host-column {
+  min-height: calc(100svh - var(--header-h) - var(--peek));
+  padding: 4rem var(--gutter) 3.5rem;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.75rem;
+  text-align: center;
+}
+.host-column h1 { max-width: 15ch; }
+/* The wordmark over the welcome (Kevin's Figma tweak, 2026-11-04): the header's lockup, centred, ZENYRA in the
+   brand teal. Decorative: the header's link already names the studio, so it is aria-hidden. */
+.hero-mark { display: grid; justify-items: center; font-size: 1.05rem; font-weight: 500; line-height: 1; letter-spacing: .16em; color: var(--teal); }
+.hero-mark small { margin-top: .4rem; font-size: .68rem; font-weight: 400; letter-spacing: .04em; color: var(--ink-soft); }
+/* The lede's one highlighted phrase is the deep teal, quieter than the headline's. */
+.host-lede .hl { color: var(--teal-night); }
+html[lang="zh-Hans"] .host-column h1 { max-width: none; font-size: clamp(2.4rem, 4.6vw, 3.75rem); }
+.host-lede { font-size: clamp(1.1rem, 1.5vw, 1.25rem); line-height: 1.55; color: var(--ink-soft); max-width: 34rem; text-wrap: balance; }
+.host-column .host-actions { margin-top: .75rem; justify-content: center; }
+
+/* The drift: three soft blotches of the brand teal and a warm sand, each a radial gradient (no blur filter, so it
+   costs the compositor a transform per frame and nothing more), wandering on long, out-of-step loops. Atmosphere,
+   never a fill (DESIGN.md's teal wash); still with reduced motion. */
+.hero-drift { position: absolute; inset: 0 0 auto; height: calc(100svh - var(--header-h)); z-index: -1; pointer-events: none; }
+.hero-drift i { position: absolute; width: 46rem; aspect-ratio: 1; border-radius: 50%; will-change: transform; }
+.hero-drift i:nth-child(1) { left: -10rem; top: -14rem; background: radial-gradient(closest-side, color-mix(in srgb, var(--teal) 20%, transparent), transparent); animation: drift-a 26s ease-in-out infinite alternate; }
+.hero-drift i:nth-child(2) { right: -14rem; top: 2rem; background: radial-gradient(closest-side, color-mix(in srgb, #d9c6a3 45%, transparent), transparent); animation: drift-b 32s ease-in-out infinite alternate; }
+.hero-drift i:nth-child(3) { left: 30%; top: 40%; width: 38rem; background: radial-gradient(closest-side, color-mix(in srgb, var(--teal) 12%, transparent), transparent); animation: drift-c 22s ease-in-out infinite alternate; }
+@keyframes drift-a { to { transform: translate(18rem, 10rem) scale(1.15); } }
+@keyframes drift-b { to { transform: translate(-16rem, 8rem) scale(.9); } }
+@keyframes drift-c { to { transform: translate(-12rem, -9rem) scale(1.2); } }
+
+/* ---------- The window: the page's one authored moment. --p (0 → 1, home-host.js) is how far the visitor has
+   scrolled into the studio. At 0 the photograph is a small pane tipped back in perspective, peeking in at the foot
+   of the screen; at 1 it stands flat and fills the width, with the photo inside it settling from a slow zoom.
+   Without script or with reduced motion --p is 1: the photo is simply there, flat and full width. ---------- */
+.host-hero { --p: 1; perspective: 1600px; perspective-origin: 50% 100%; }
+/* A head script adds .motion before first paint (motion allowed), so the window starts closed rather than flashing open. */
+html.motion .host-hero { --p: 0; }
+.host-window { position: relative; margin: 0; padding-inline: clamp(0rem, 1.5vw, 1.25rem); }
+.host-window-pane {
+  --lean: 18deg; --small: .72;
+  overflow: hidden; transform-origin: 50% 0;
+  border-radius: calc(var(--radius-image) * 1.6 * (1 - var(--p)) + var(--radius-image) * .5 * var(--p));
+  /* Lifted off the page while it peeks in; the shadow settles to nothing as the window opens flat (--p → 1). */
+  box-shadow: 0 calc(2.25rem * (1 - var(--p))) calc(4.5rem * (1 - var(--p))) calc(-1.25rem * (1 - var(--p))) rgb(40 38 42 / calc(.28 * (1 - var(--p))));
+  transform:
+    translateZ(0)
+    rotateX(calc(var(--lean) * (1 - var(--p))))
+    scale(calc(var(--small) + (1 - var(--small)) * var(--p)));
+}
+.host-window img {
+  display: block; width: 100%; aspect-ratio: 16 / 7; object-fit: cover; object-position: center 40%;
+  transform: scale(calc(1.22 - .22 * var(--p)));
+  transform-origin: 50% 35%;
+}
+/* While the window opens, the welcome steps back into the room: a little smaller, softer, further away. */
+.host-column > * {
+  transform: translateY(calc(var(--p-text, 0) * -2.5rem)) scale(calc(1 - var(--p-text, 0) * .05));
+  opacity: calc(1 - var(--p-text, 0) * .75);
+}
+
+/* Arrival: the welcome comes into focus line by line (blur to sharp, a short rise), then the window rises in.
+   CSS only, once, and everything ends visible; reduced motion skips it. */
+@keyframes focus-in { from { opacity: 0; filter: blur(10px); translate: 0 1.25rem; } }
+@keyframes window-in { from { opacity: 0; translate: 0 6rem; } }
+.host-column > * { animation: focus-in 1100ms var(--ease-out) backwards; }
+.host-column > :nth-child(1) { animation-delay: 60ms; }
+.host-column > :nth-child(2) { animation-delay: 180ms; }
+.host-column > :nth-child(3) { animation-delay: 340ms; }
+.host-column > :nth-child(4) { animation-delay: 480ms; }
+.host-window { animation: window-in 1400ms var(--ease-out) 520ms backwards; }
+
+/* The drift answers the pointer a little, so the room feels like it has air in it. */
+.hero-drift { translate: calc(var(--mx, 0) * 2.5rem) calc(var(--my, 0) * 2rem); transition: translate 1200ms var(--ease-out); }
+
+/* Hero buttons lean toward the pointer (home-host.js writes --tx/--ty; a few px at most). */
+[data-magnet] { translate: var(--tx, 0) var(--ty, 0); transition: translate 500ms var(--ease-out), background-color 300ms var(--ease-out), border-color 300ms var(--ease-out), color 300ms var(--ease-out), transform 160ms var(--ease-out); }
+[data-magnet].is-pulled { transition-duration: 120ms, 300ms, 300ms, 300ms, 160ms; }
+
+/* ---------- Cards that answer the pointer: a small turn in perspective toward it, with a soft teal light under
+   the pointer (--gx/--gy). Fine pointers only, motion allowed; the advisor card takes the light but never turns,
+   since it holds the field you type in. ---------- */
+[data-tilt], [data-glow] { position: relative; isolation: isolate; }
+[data-tilt] {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(0);
+  box-shadow: var(--rest, var(--shadow-1));
+  transition: transform 700ms var(--ease-out), box-shadow 500ms var(--ease-out);
+}
+[data-tilt].is-tilting { transition-duration: 140ms, 500ms; }
+/* Picked up: a card the pointer holds rises one level (resting 1 → 2, raised 2 → 3). */
+[data-tilt].is-lit { box-shadow: var(--lift, var(--shadow-2)); }
+:is([data-tilt], [data-glow])::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(28rem circle at var(--gx, 50%) var(--gy, 50%), color-mix(in srgb, var(--teal) 9%, transparent), transparent 60%);
+  opacity: 0; transition: opacity 500ms var(--ease-out);
+}
+:is([data-tilt], [data-glow]).is-lit::before { opacity: 1; }
+.path-steps li[data-tilt] { background-clip: padding-box; }
+
+/* Membership tiers are dealt up into place as a set when the band arrives (home-host.js adds .is-pending only to
+   a list still below the fold, then .is-dealt). The stagger is capped by the list: four cards, 90ms apart. */
+@keyframes deal-up { from { opacity: 0; transform: perspective(900px) rotateX(32deg) translateY(2.5rem); } }
+[data-deal].is-pending > li { opacity: 0; }
+[data-deal].is-dealt > li { animation: deal-up 1000ms var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+
+/* "Powered by wellness AI": a status label that says the advisor is an AI, on the advisor card and in the
+   conversation's bar. Not a kicker: it states what the thing is, beside it, rather than labelling a heading. */
+.ai-badge {
+  justify-self: start; display: inline-flex; align-items: center; gap: .4rem;
+  min-height: 1.875rem; padding: 0 .8rem 0 .6rem;
+  border: 1px solid color-mix(in srgb, var(--teal) 35%, transparent); border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--teal) 7%, var(--paper));
+  font-size: .8125rem; font-weight: 500; letter-spacing: -.005em; color: var(--teal-deep);
+}
+.ai-badge img { flex: none; }
+.begin-card--advisor .ai-badge { margin-bottom: -1rem; }
+.am-bar .ai-badge { margin-right: auto; margin-left: .25rem; }
+
+/* ---------- Three ways to begin: the advisor's card is the largest; booking and calling stand beside it. ---------- */
+.host-begin { padding-block: clamp(4rem, 8vw, 6.5rem) var(--section); background: var(--cream); }
+.begin-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 1.25rem; }
+.begin-card {
+  padding: var(--card-pad); display: grid; align-content: space-between; justify-items: start; gap: 1.75rem;
+  background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-1);
+}
+.begin-card--advisor { grid-row: span 2; align-content: center; gap: 2rem; justify-items: stretch; box-shadow: var(--shadow-2); }
+.begin-card-head { display: grid; gap: .6rem; }
+/* Card headings: one size for the small begin cards and the plan cards; the advisor's is the larger exception. */
+.begin-card h3, .plan-grid .tier h3 { font-size: clamp(1.3rem, 1.8vw, 1.5rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.25; }
+html[lang="zh-Hans"] :is(.begin-card, .plan-grid .tier) h3 { letter-spacing: 0; }
+.begin-card--advisor h3 { font-size: clamp(1.5rem, 2.4vw, 1.875rem); letter-spacing: -.03em; line-height: 1.2; }
+.begin-card-head p { color: var(--ink-soft); font-size: 1rem; line-height: 1.55; max-width: 34rem; text-wrap: pretty; }
+.begin-card--advisor .begin-card-head p { font-size: 1.1rem; }
+.begin-card--advisor .fine-print { margin-top: -1rem; font-size: .8rem; }
+.begin-card .button img { flex: none; }
+.begin-card .button--ghost { display: inline-flex; align-items: center; gap: .5rem; }
+
+.host-ask { display: grid; gap: 1rem; }
+
+.composer {
+  min-height: 4rem; padding: .5rem .5rem .5rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-1);
+  transition: border-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+}
+.composer:focus-within { border-color: var(--teal-deep); }
+.composer:hover:not(:focus-within) { border-color: var(--ink-soft); }
+.composer input { flex: 1; min-width: 0; min-height: 3rem; border: 0; background: none; font-size: 1.125rem; line-height: 1.55; text-overflow: ellipsis; }
+.composer input::placeholder { color: var(--ink-soft); opacity: 1; }
+.composer input:focus-visible { outline: none; }
+.composer:has(input:focus-visible) { outline: 2px solid var(--teal-deep); outline-offset: 3px; }
+.composer-send {
+  flex: none; width: 3rem; height: 3rem; display: grid; place-items: center;
+  border: 0; border-radius: var(--radius-pill); background: var(--teal-deep); cursor: pointer;
+  transition: background-color 300ms var(--ease-out);
+}
+.composer-send:hover { background: var(--teal-night); }
+
+.host-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.host-chips button {
+  min-height: 2.75rem; padding: 0 1rem;
+  border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--paper);
+  font-size: .875rem; cursor: pointer;
+  transition: border-color 300ms var(--ease-out), color 300ms var(--ease-out);
+}
+.host-chips button:hover { border-color: var(--teal-deep); color: var(--teal-deep); }
+
+
+/* ---------- Membership: all six plans as styles.css's .tier cards, on a cream band. ---------- */
+/* A cream band, like "Three ways to begin": the bands now alternate (cream, white, cream, white, cream), so the
+   changes of section need no hairlines, and the plans are the same borderless white cards as the begin cards. */
+.host-path { padding-block: var(--section); background: var(--cream); }
+.plan-grid .tier { padding: var(--card-pad); border-color: transparent; }
+/* The first visit keeps the site's one outlined card: "start here". */
+.plan-grid .tier--start { border-color: var(--teal); }
+/* Most popular is raised above its neighbours instead of tinted. */
+.plan-grid .tier--featured { background: var(--surface); --rest: var(--shadow-2); --lift: var(--shadow-3); }
+.plan-grid .tier--featured .tier-rule { border-color: var(--line); }
+.host-path .host-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+/* Every plan as a card, three across (styles.css's .tier card). The cards in a row share a height; the price
+   rule and any action sit where the content ends. */
+.plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.plan-grid .tier-flag { top: 1.5rem; }
+.plan-grid .tier > .tier-rule { color: var(--ink-soft); }
+@media (max-width: 60rem) { .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 36rem) { .plan-grid { grid-template-columns: minmax(0, 1fr); } }
+/* Joining is a call or a visit (client's request): one quiet line of links under the plans, on a hairline. */
+.path-join { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line-strong); color: var(--ink-soft); }
+.path-join a { color: var(--teal-deep); font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: .3em; white-space: nowrap; }
+.path-join a:hover { text-decoration-color: currentColor; }
+
+/* ---------- Services ---------- */
+.host-services { padding-block: var(--section); }
+.host-services-grid { display: grid; grid-template-columns: minmax(0, 560fr) minmax(0, 560fr); gap: clamp(2.5rem, 6vw, 5rem); }
+/* The photo column is a stack: the room for the service in focus fades up over the last one. */
+.host-services-photo { position: relative; min-height: 34rem; border-radius: var(--radius-image); background: var(--cream); }
+.host-services-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.host-services-photo img.is-shown { opacity: 1; }
+.host-services-photo img:not(.is-shown) { transform: scale(1.04); }
+.host-services-list { display: grid; align-content: start; gap: 2rem; }
+.service-rows button {
+  width: 100%; padding: 1.4rem 0; display: flex; align-items: center; gap: 1.5rem;
+  border: 0; border-bottom: 1px solid var(--fog); text-align: left; cursor: pointer;
+  /* A teal hairline draws across the row in focus, over its grey one. */
+  background: linear-gradient(var(--teal), var(--teal)) left bottom / 0 1px no-repeat;
+  transition: background-size 600ms var(--ease-out);
+}
+.service-rows button:is(:hover, :focus-visible) { background-size: 100% 1px; }
+.service-rows button:focus-visible { outline-offset: 6px; }
+.service-rows button > span { flex: 1; display: grid; gap: .25rem; }
+.service-rows strong { font-size: 1.125rem; font-weight: 500; line-height: 1.33; letter-spacing: -.02em; transition: color 300ms var(--ease-out); }
+.service-rows button > span > span { font-size: .9rem; line-height: 1.45; color: var(--ink-soft); }
+.service-rows img { flex: none; opacity: .6; transition: transform 450ms var(--ease-out), opacity 300ms var(--ease-out); }
+.service-rows button:is(:hover, :focus-visible) strong { color: var(--teal-deep); }
+.service-rows button:is(:hover, :focus-visible) img { opacity: 1; transform: translateX(.35rem); }
+
+/* ---------- Founder + recognitions: styles.css's .founder, as on the previous home. ---------- */
+/* Recognitions as plain entries on hairlines rather than five bordered boxes. */
+.host-page .recognition-list { gap: 0; }
+.host-page .recognition-list button { padding: .35rem 1.25rem; border: 0; border-left: 1px solid var(--line); border-radius: 0; background: none; transition: color 300ms var(--ease-out); }
+.host-page .recognition-list li:first-child button { padding-left: 0; border-left: 0; }
+.host-page .recognition-list button:hover { background: none; }
+.host-page .recognition-list button:is(:hover, :focus-visible) strong { color: var(--teal-deep); }
+.host-page .recognition-list strong { transition: color 300ms var(--ease-out); }
+
+/* ---------- Visit: details and actions are styles.css's .visit-details / .visit-actions. ---------- */
+.host-visit { padding-block: var(--section); background: var(--cream); }
+.host-visit-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+.host-visit-photo img { width: 100%; aspect-ratio: 7 / 6; object-fit: cover; border-radius: var(--radius-image); }
+
+/* ---------- Footer: logo and line stacked, nav at right. ---------- */
+.host-footer { padding-block: 4rem; } /* Visit's cream band ends the page; the colour change is the edge. */
+.host-footer .footer-grid { align-items: start; gap: 2.5rem; }
+.host-footer .footer-brand { flex-direction: column; align-items: flex-start; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 68rem) {
+  .begin-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .begin-card--advisor { grid-column: 1 / -1; grid-row: auto; }
+  /* The recognitions wrap here, so their hairlines run along the top instead of between columns. */
+  .host-page .recognition-list { gap: 0 1.5rem; }
+  .host-page .recognition-list button, .host-page .recognition-list li:first-child button { padding: 1rem 0 .5rem; border-left: 0; border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 52rem) {
+  .host-hero { background: linear-gradient(var(--paper) calc(100% - 8rem), var(--cream) 0); }
+  .host-window img { aspect-ratio: 4 / 3; }
+  .host-window-pane { --lean: 12deg; --small: .84; }
+  .hero-drift i { width: 28rem; }
+  .hero-drift i:nth-child(3) { width: 24rem; }
+  .host-services-grid, .host-visit-grid, .begin-grid { grid-template-columns: minmax(0, 1fr); }
+  .host-services-photo { min-height: 0; aspect-ratio: 4 / 5; max-height: 34rem; }
+}
+
+@media (max-width: 36rem) {
+  .host-column { gap: 1.5rem; }
+  .host-column .host-actions { width: 100%; }
+  .composer { padding-left: 1.1rem; }
+  .composer input { font-size: 1rem; }
+  .host-actions, .visit-actions { display: grid; width: 100%; }
+  .begin-card .button { width: 100%; }
+}
+
+/* ---------- Advisor module (Figma 72:2020) ----------
+   A layer under the sticky header, on cream, that home-host.js grows out of whatever opened it (clip-path)
+   and shrinks back into on close. The page under it is inert while it is open. */
+html.am-open { overflow: hidden; }
+.advisor-module {
+  position: fixed; inset: var(--header-h) 0 0; z-index: 40;
+  overflow-y: auto; overscroll-behavior: contain;
+  background: var(--cream);
+}
+.am-body { padding-block: 3rem 0; display: grid; grid-template-columns: minmax(0, 1fr) 25rem; gap: 3rem; align-items: start; }
+.am-chat { min-height: calc(100svh - var(--header-h) - 3rem); display: flex; flex-direction: column; gap: 2rem; }
+.am-bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.am-back img { flex: none; }
+.am-progress { width: min(20rem, 100%); display: grid; gap: .5rem; }
+.am-progress p { font-size: .875rem; font-weight: 500; color: var(--ink-soft); }
+.am-progress-step { color: var(--teal-deep); margin-right: .35rem; }
+.am-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; }
+.am-track i { height: 4px; border-radius: 2px; background: var(--fog); transition: background-color 400ms var(--ease); }
+.am-track i.is-done { background: var(--teal); }
+
+.am-thread { flex: 1; display: grid; align-content: start; gap: 1.5rem; }
+.am-msg { display: flex; gap: .75rem; align-items: flex-start; }
+.am-avatar { flex: none; width: 2rem; height: 2rem; padding: .2rem; border: 1px solid var(--fog); border-radius: var(--radius-pill); background: var(--paper); }
+.am-bubble { max-width: 32.5rem; padding: 1rem 1.25rem; display: grid; gap: .25rem; background: var(--surface); border-radius: var(--radius-sm) var(--radius) var(--radius) var(--radius); font-size: 1rem; line-height: 1.5; }
+.am-who { font-size: .75rem; font-weight: 500; line-height: 1.33; letter-spacing: .02em; color: var(--ink-soft); }
+.am-msg--guest { justify-content: flex-end; }
+.am-msg--guest .am-bubble { padding: .75rem 1.25rem; background: var(--teal-deep); color: #fff; border-radius: var(--radius) var(--radius-sm) var(--radius) var(--radius); }
+.am-typing { display: inline-flex; gap: .3rem; padding-block: .45rem; }
+.am-typing i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--ink-soft); opacity: .35; animation: am-dot 1s var(--ease) infinite; }
+.am-typing i:nth-child(2) { animation-delay: .15s; }
+.am-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes am-dot { 40% { opacity: 1; transform: translateY(-2px); } }
+
+/* Quick replies sit under the question, indented past the avatar. Selected = teal-deep outline + check. */
+.am-replies { padding-left: 2.75rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+.am-replies button {
+  min-height: 2.25rem; padding: 0 1rem; display: inline-flex; align-items: center; gap: .5rem;
+  border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--paper);
+  font-size: .875rem; font-weight: 500; cursor: pointer;
+  transition: border-color 300ms var(--ease-out), color 300ms var(--ease-out);
+}
+.am-replies button::before { content: ""; width: 1rem; height: 1rem; margin-left: -.25rem; background: url("assets/icons/check.svg") center / contain no-repeat; display: none; }
+.am-replies button:hover:not(:disabled) { border-color: var(--teal-deep); color: var(--teal-deep); }
+.am-replies button[aria-pressed="true"] { border-color: var(--teal-deep); color: var(--teal-deep); }
+.am-replies button[aria-pressed="true"]::before { display: block; }
+.am-replies button:disabled { cursor: default; }
+.am-replies button:disabled:not([aria-pressed="true"]) { opacity: .5; }
+.am-actions { padding-left: 2.75rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+
+.am-compose { position: sticky; bottom: 0; padding-block: 1rem 2rem; display: grid; gap: .75rem; text-align: center; background: linear-gradient(transparent, var(--cream) 1.25rem); }
+
+.am-side { position: sticky; top: 3rem; display: grid; gap: 1.5rem; }
+.am-card { padding: 2rem; display: grid; gap: 1rem; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-1); }
+.am-compose .composer { box-shadow: var(--shadow-3); }
+.am-card h3 { font-size: 1.125rem; line-height: 1.33; }
+.am-card-lede { margin-top: -.75rem; font-size: .875rem; line-height: 1.43; color: var(--ink-soft); }
+.am-facts { margin-top: .5rem; display: grid; gap: 1rem; }
+.am-facts dt { font-size: .75rem; font-weight: 500; line-height: 1.33; letter-spacing: .02em; color: var(--ink-soft); }
+.am-facts dd { margin-top: .25rem; font-size: 1rem; line-height: 1.5; }
+.am-facts dd.is-pending { color: var(--ink-soft); }
+.am-call { width: 100%; }
+
+/* Entrances for messages added after the module has opened. */
+.am-in { animation: am-in 420ms var(--ease) both; }
+@keyframes am-in { from { opacity: 0; transform: translateY(.75rem); } }
+
+@media (max-width: 60rem) {
+  .am-body { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+  .am-side { position: static; padding-bottom: 2rem; }
+  .am-chat { min-height: calc(100svh - var(--header-h) - 1.5rem); }
+}
+
+@media (max-width: 36rem) {
+  .am-bar { flex-direction: column; align-items: stretch; }
+  .am-progress { width: 100%; }
+  .am-back { align-self: flex-start; }
+  .am-bubble { max-width: 17.5rem; }
+  .am-replies, .am-actions { padding-left: 0; }
+  .am-replies button { min-height: 2.75rem; }
+}
+
+/* ---------- Steeping: each heading's teal phrase arrives in ink and steeps into the brand teal, slowly, like
+   an infusion, the first time the heading comes into view (home-host.js adds .steep, then .is-steeped). The
+   founder's quote draws its teal rule down the same way. Script-only, so without it everything is already teal. */
+html.motion .steep.is-steeped .hl { transition: color 2200ms var(--ease-out); }
+html.motion .steep:not(.is-steeped) .hl { color: var(--ink); }
+html.motion .founder-copy blockquote.steep {
+  border-left-color: transparent;
+  background: linear-gradient(var(--teal), var(--teal)) left top / 2px 0 no-repeat;
+  background-origin: border-box;
+}
+html.motion .founder-copy blockquote.steep.is-steeped { background-size: 2px 100%; transition: background-size 1600ms var(--ease-out) 200ms; }
+
+/* The send button rests a shade lighter while the field is empty, and comes up to full teal as you type:
+   it says when there is something to send. */
+.composer-send img { transition: transform 450ms var(--ease-out); }
+.composer:has(input:placeholder-shown) .composer-send { background: color-mix(in srgb, var(--teal-deep) 50%, var(--paper)); }
+.composer:has(input:placeholder-shown) .composer-send img { transform: translateY(.15rem); }
+.composer:has(input:placeholder-shown) .composer-send:hover { background: color-mix(in srgb, var(--teal-deep) 65%, var(--paper)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift i, .host-column > *, .host-window, [data-deal].is-dealt > li { animation: none; }
+  .hero-drift, [data-magnet] { translate: none; }
+  [data-tilt] { transform: none; }
+  [data-reveal], [data-reveal] img, .service-rows button, .host-page .site-nav a { transition-property: opacity, color, background-size; }
+  .host-services-photo img:not(.is-shown) { transform: none; }
+  .am-in, .am-typing i { animation: none; }
+  .am-typing i { opacity: .6; }
+}
+
+/* ---------- Recognitions: the certificate rises above the card you point at or focus. ----------
+   One shared print (home-host.js) that slides between cards; a paper mat and a hairline instead of a shadow
+   (DESIGN.md: no shadows). Only where there is real hover; on touch the card opens the lightbox as before. */
+.host-page .recognition { position: relative; }
+.rec-preview {
+  position: absolute; left: 0; top: 0; z-index: 5; width: 17.5rem; padding: .5rem;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-3);
+  pointer-events: none; opacity: 0;
+  clip-path: inset(100% 0 0 0 round var(--radius));
+  transition: clip-path 650ms var(--ease-out), opacity 300ms var(--ease-out), transform 550ms var(--ease-out);
+}
+.rec-preview.is-on { opacity: 1; clip-path: inset(0 0 0 0 round var(--radius)); }
+.rec-preview img { width: 100%; height: auto; border-radius: calc(var(--radius) - .5rem); transition: transform 900ms var(--ease-out); }
+.rec-preview:not(.is-on) img { transform: scale(1.06); }
+.rec-preview.is-instant { transition: clip-path 650ms var(--ease-out), opacity 300ms var(--ease-out); }
+@media (prefers-reduced-motion: reduce) {
+  .rec-preview { transition: opacity 200ms linear; clip-path: none; }
+  .rec-preview img { transition: none; transform: none !important; }
+}

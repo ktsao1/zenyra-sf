@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Home · after "Iteration 1 · Host at the window" (Figma 2NXIyQA6Cl9FeZXKDOeJse, node 71:1654), reworked
+       2026-11-04: a calm welcome hero, then "Three ways to begin" (the advisor's instant plan and quote, booking
+       online, or a call), then the secondary content: Services, Membership, About, Visit.
+       The previous home is kept as index-old.html. -->
+  <title data-i18n="meta.homeTitle">Zenyra San Francisco — Head Spa &amp; Wellness in the Sunset</title>
+  <meta name="description" data-i18n-content="meta.homeDescription" content="Zenyra (悠然美) is a head spa and wellness studio in San Francisco’s Sunset District. First visits from $29. Open daily 9 AM–9 PM.">
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="home-host.css?v=16">
+  <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+  <script src="i18n.js?v=14"></script>
+  <script src="main.js?v=13" defer></script>
+  <script src="home-host.js?v=15" defer></script>
+</head>
+<body class="host-page">
+  <a class="skip-link" href="#main" data-i18n="common.skip">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Zenyra San Francisco home">
+      <img src="assets/images/zenyra-icon.png" alt="" width="44" height="44">
+      <span class="brand-name">ZENYRA<small>悠然美 · San Francisco</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary" data-i18n-aria="common.navLabel">
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#membership" data-i18n="nav.membership">Membership</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Gallery</a>
+      <a href="#visit" data-i18n="nav.visit">Visit</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang-switch="en" lang="en">EN</button>
+        <button type="button" data-lang-switch="zh" lang="zh-Hans">中文</button>
+      </div>
+      <a class="button button--small" href="https://zenyra-book.mase.cloud/" target="_blank" rel="noopener" data-book data-i18n="host.bookNow">Book Now</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-i18n="common.menu">Menu</button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#membership" data-i18n="nav.membership">Membership</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Gallery</a>
+      <a href="#visit" data-i18n="nav.visit">Visit</a>
+      <a class="button" href="#begin" data-i18n="cta.bookFirst">Book your first visit</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero · a calm welcome: text and the two first moves (book, or go down to the advisor) over a slow drift
+         of colour, with the room's photograph peeking in at the foot of the first screen and straddling the
+         cream band below. (Reworked 2026-11-04: the advisor no longer opens the page; it has its own section.) -->
+    <section class="host-hero" aria-labelledby="host-title">
+      <div class="hero-drift" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="host-column">
+        <p class="hero-mark" aria-hidden="true">ZENYRA<small>悠然美 · San Francisco</small></p>
+        <h1 id="host-title" data-i18n="host.title" data-i18n-rich>Welcome. Let’s find care that <span class="hl">fits you</span>.</h1>
+        <p class="host-lede" data-i18n="host.heroLede" data-i18n-rich>Professional care, trusted relationships, and local community in <span class="hl">San Francisco</span>.</p>
+        <div class="host-actions">
+          <a class="button" data-magnet href="#begin" data-i18n="host.heroBook">Book your visit</a>
+          <a class="button button--ghost" data-magnet href="#begin" data-i18n="host.heroMore">Learn More</a>
+        </div>
+      </div>
+      <!-- The window: tilted back and small while it peeks in, it straightens and widens to the full screen as
+           the visitor scrolls into the studio (home-host.js writes --p, 0 → 1). -->
+      <figure class="host-window" data-window>
+        <div class="host-window-pane">
+          <img src="assets/images/treatment-room-wide.webp" alt="A treatment room under aqua and cream ceiling drapery" data-i18n-alt="host.roomAlt" width="2000" height="1500" fetchpriority="high">
+        </div>
+      </figure>
+    </section>
+
+    <!-- Ways to begin · the advisor (instant plan + quote), booking online, or a phone call. The advisor is the
+         largest of the three, but it is one choice among them, not the front door. -->
+    <section class="host-begin" id="begin" aria-labelledby="begin-title">
+      <div class="shell">
+        <header class="host-head host-head--center">
+          <h2 id="begin-title" data-i18n="host.beginTitle" data-i18n-rich>Three ways to <span class="hl">begin</span>.</h2>
+          <p data-i18n="host.beginLede">Ask our AI powered advisor for a plan, book online if you already know what you want, or call and talk to a specialist.</p>
+        </header>
+        <div class="begin-grid">
+          <div class="begin-card begin-card--advisor" id="ask" data-glow>
+            <p class="ai-badge"><img src="assets/icons/sparkle.svg" alt="" width="16" height="16"><span data-i18n="host.aiBadge">Powered by wellness AI</span></p>
+            <div class="begin-card-head">
+              <h3 data-i18n="host.planTitle">Get an instant plan and quote</h3>
+              <p data-i18n="host.lede">Chat with our AI advisor. You’ll get a visit that fits your needs, with prices, before anything is actually booked.</p>
+            </div>
+            <div class="host-ask">
+              <form class="composer" data-host-form>
+                <label class="visually-hidden" for="host-input" data-i18n="chat.label">Your question</label>
+                <input id="host-input" name="q" autocomplete="off" required placeholder="I’ve been sleeping badly and my shoulders ache…" data-i18n-placeholder="host.placeholder">
+                <button class="composer-send" type="submit" aria-label="Send" data-i18n-aria="chat.send">
+                  <img src="assets/icons/send.svg" alt="" width="20" height="20">
+                </button>
+              </form>
+              <div class="host-chips" role="group" aria-label="Example questions" data-i18n-aria="chat.examples">
+                <button type="button" data-host-q="host.q1" data-i18n="host.q1Label">Stress &amp; sleep</button>
+                <button type="button" data-host-q="host.q2" data-i18n="host.q2Label">Scalp &amp; hair care</button>
+                <button type="button" data-host-q="host.q3" data-i18n="host.q3Label">Neck &amp; shoulders</button>
+                <button type="button" data-host-q="host.q4" data-i18n="host.q4Label">Cold hands &amp; feet</button>
+              </div>
+            </div>
+            <p class="fine-print" data-i18n="host.disclaimer">General wellness guidance, not medical advice.</p>
+          </div>
+
+          <div class="begin-card" data-tilt>
+            <div class="begin-card-head">
+              <h3 data-i18n="host.knowWhat">Know what you want?</h3>
+              <p data-i18n="host.bookBody">Choose a service and a time online. First time visits starting from $29.</p>
+            </div>
+            <a class="button" href="https://zenyra-book.mase.cloud/" target="_blank" rel="noopener" data-book data-i18n="host.bookOnline">Book online</a>
+          </div>
+
+          <div class="begin-card" data-tilt>
+            <div class="begin-card-head">
+              <h3 data-i18n="am.personTitle">Prefer to talk to a person?</h3>
+              <p data-i18n="am.personBody">Call and we’ll book you directly. We speak English, Mandarin, Cantonese. Available 9 AM - 9 PM daily.</p>
+            </div>
+            <a class="button button--ghost" href="tel:+14157124366">
+              <img src="assets/icons/phone.svg" alt="" width="20" height="20">
+              <span><span data-i18n="host.call">Call</span> (415) 712-4366</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services: each row hands the service to the advisor. -->
+    <section class="host-services" id="services" aria-labelledby="services-title">
+      <div class="shell host-services-grid">
+        <div class="host-services-list">
+          <header class="host-head">
+            <h2 id="services-title" data-i18n="host.svcTitle" data-i18n-rich>What we <span class="hl">offer</span></h2>
+            <p data-i18n="host.svcLede">Not sure where to begin? The advisor will point you to what fits.</p>
+          </header>
+          <ul class="service-rows">
+            <li><button type="button" data-host-q="host.ask0"><span><strong data-i18n="home.sigTitle">Signature Head Spa</strong><span data-i18n="host.svc0Body">Scalp care, warm herbal steam, and an unhurried head, neck, and shoulder massage.</span></span><img src="assets/icons/arrow-right.svg" alt="" width="20" height="20"></button></li>
+            <li><button type="button" data-host-q="host.ask1"><span><strong data-i18n="home.svc1">Herbal facial steam</strong><span data-i18n="host.svc1Body">Gentle herbal steam and skin care, tailored to your skin.</span></span><img src="assets/icons/arrow-right.svg" alt="" width="20" height="20"></button></li>
+            <li><button type="button" data-host-q="host.ask2" data-photo="capsule"><span><strong data-i18n="home.svc2">Smart wellness equipment</strong><span data-i18n="host.svc2Body">Warming sessions in our Energy 360 capsule. From $29 for new guests.</span></span><img src="assets/icons/arrow-right.svg" alt="" width="20" height="20"></button></li>
+            <li><button type="button" data-host-q="host.ask3" data-photo="seat"><span><strong data-i18n="home.svc3">Legs &amp; feet</strong><span data-i18n="home.svc3Body">Warmth and relief for feet that run cold or legs tired from standing.</span></span><img src="assets/icons/arrow-right.svg" alt="" width="20" height="20"></button></li>
+            <li><button type="button" data-host-q="host.ask4"><span><strong data-i18n="home.svc4">Back &amp; full body</strong><span data-i18n="home.svc4Body">Deep relaxation for desk-bound shoulders and everyday tension.</span></span><img src="assets/icons/arrow-right.svg" alt="" width="20" height="20"></button></li>
+            <li><button type="button" data-host-q="host.ask5"><span><strong data-i18n="home.svc5">Core &amp; pelvic wellness</strong><span data-i18n="home.svc5Body">Gentle, non-invasive care, discussed privately before you decide.</span></span><img src="assets/icons/arrow-right.svg" alt="" width="20" height="20"></button></li>
+          </ul>
+          <div class="host-actions">
+            <a class="button" href="#begin" data-i18n="cta.bookFirst">Book your first visit</a>
+          </div>
+        </div>
+        <!-- The photo follows the service in focus: each row names the room it happens in (data-photo);
+             rows without a matching photo of their own show the default. -->
+        <figure class="host-services-photo" data-reveal>
+          <img class="is-shown" data-photo="default" src="assets/images/treatment-room-soft.webp" alt="A softly lit private treatment room with a draped canopy" data-i18n-alt="home.sigAlt" width="1500" height="2000" loading="lazy" decoding="async">
+          <img data-photo="capsule" src="assets/images/wellness-capsule-room.webp" alt="The Energy 360 wellness capsule in its own room" data-i18n-alt="host.capsuleAlt" width="1477" height="1108" loading="lazy" decoding="async">
+          <img data-photo="seat" src="assets/images/window-wellness-seat.webp" alt="Foot-soak seats by the window" data-i18n-alt="host.seatAlt" width="1108" height="1477" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <!-- Membership · the Rhythm Growth Path: every plan, as cards. -->
+    <section class="host-path" id="membership" aria-labelledby="path-title">
+      <div class="shell">
+        <header class="host-head">
+          <h2 id="path-title" data-i18n="home.pathTitle" data-i18n-rich>Come back. Build a <span class="hl">rhythm</span>.</h2>
+          <p data-i18n="host.pathLede">Enjoying our services? Explore our various membership plans to get the best value for our services.</p>
+        </header>
+        <!-- All six plans as cards (the membership page was folded into the home, 2026-11-04). Information only:
+             joining is a call or a visit (the line below). The Explorer is the first visit, so it books online. -->
+        <ol class="plan-grid" data-deal>
+          <li class="tier tier--start" data-tilt>
+            <p class="tier-num">01 · <span data-i18n="tier.1.stage">First visit</span></p>
+            <h3 data-i18n="tier.1.name">Rhythm Explorer</h3>
+            <div class="tier-prices">
+              <p><strong>$29</strong><span data-i18n="tier.1.optA">2 smart-equipment experiences</span></p>
+              <p><strong>$59</strong><span data-i18n="tier.1.optB">4 smart-equipment experiences</span></p>
+            </div>
+            <p class="tier-rule" data-i18n="tier.1.rule">Choose one option. One-time purchase per person.</p>
+            <a class="button" href="#begin" data-i18n="cta.bookFirst">Book your first visit</a>
+          </li>
+          <li class="tier" data-tilt>
+            <p class="tier-num">02 · <span data-i18n="tier.2.stage">Build familiarity</span></p>
+            <h3 data-i18n="tier.2.name">Rhythm Insider</h3>
+            <div class="tier-prices"><p><strong>$199</strong><span data-i18n="tier.2.opt">7 smart-equipment visits</span></p></div>
+            <p class="tier-rule" data-i18n="tier.2.rule">Smart equipment only. One-time purchase per person.</p>
+          </li>
+          <li class="tier" data-tilt>
+            <p class="tier-num">03 · <span data-i18n="tier.3.stage">Member access</span></p>
+            <h3 data-i18n="tier.3.name">Rhythm Life Member</h3>
+            <div class="tier-prices"><p><strong>$499</strong><span data-i18n="tier.3.opt">One-time membership</span></p></div>
+            <p class="tier-rule" data-i18n="tier.3.body">Member pricing on all eligible services, plus Member Day, bring-a-friend days, and priority booking.</p>
+          </li>
+          <li class="tier tier--featured" data-tilt>
+            <p class="tier-flag" data-i18n="mem.popular">Most popular</p>
+            <p class="tier-num">04 · <span data-i18n="tier.4.stage">Monthly practice</span></p>
+            <h3 data-i18n="tier.4.name">Rhythm Witness</h3>
+            <div class="tier-prices"><p><strong>$129</strong><span data-i18n="tier.4.opt">per month</span></p></div>
+            <p class="tier-rule"><span data-i18n="tier.4.body">One wellness session each month — head spa or herbal facial steam — paired with smart equipment.</span> <span data-i18n="tier.4.annual">Or $1,548 paid yearly, with $300 in smart-equipment credit included.</span></p>
+          </li>
+          <li class="tier" data-tilt>
+            <p class="tier-num">05 · <span data-i18n="tier.5.stage">Share the experience</span></p>
+            <h3 data-i18n="tier.5.name">Rhythm Ambassador</h3>
+            <div class="tier-prices"><p><strong>$3,980</strong><span data-i18n="tier.5.opt">Includes $1,000 smart-equipment credit</span></p></div>
+            <p class="tier-rule" data-i18n="tier.5.rule">Full benefits explained during a personal consultation.</p>
+            <p class="placeholder-inline" data-i18n="mem.benefitsTbd">Detailed benefits — to be added</p>
+          </li>
+          <li class="tier" data-tilt>
+            <p class="tier-num">06 · <span data-i18n="tier.6.stage">Deepen your practice</span></p>
+            <h3 data-i18n="tier.6.name">Rhythm Leader</h3>
+            <div class="tier-prices"><p><strong>$9,800</strong><span data-i18n="tier.6.opt">Includes $5,000 smart-equipment credit</span></p></div>
+            <p class="tier-rule" data-i18n="tier.6.rule">Full benefits and eligibility explained during a personal consultation.</p>
+            <p class="placeholder-inline" data-i18n="mem.benefitsTbd">Detailed benefits — to be added</p>
+          </li>
+        </ol>
+        <!-- Memberships are set up by phone or in person (client's request): no online sign-up. -->
+        <p class="path-join"><span data-i18n="host.pathJoinA">To join a plan, call</span> <a href="tel:+14157124366">(415) 712-4366</a> <span data-i18n="host.pathJoinB">or visit us at</span> <a href="https://www.google.com/maps/search/?api=1&amp;query=2560+Noriega+St%2C+San+Francisco%2C+CA+94122" target="_blank" rel="noopener">2560 Noriega St</a><span data-i18n="host.pathJoinC">.</span></p>
+      </div>
+    </section>
+
+    <!-- Founder + recognitions (from the previous home, index-old.html, unchanged) -->
+    <section class="founder shell" id="about" aria-labelledby="founder-title">
+      <figure class="founder-photo" data-reveal>
+        <img src="assets/images/ellaine-community-host.webp" alt="Founder Ellaine Luo serving cupcakes at a Zenyra community event" data-i18n-alt="home.founderAlt" width="1500" height="2000" loading="lazy">
+      </figure>
+      <div class="founder-copy">
+        <h2 id="founder-title" data-i18n="home.founderTitle">Ellaine Luo built Zenyra around people.</h2>
+        <p data-i18n="home.founderP1">Ellaine began in the beauty industry in China. In San Francisco she spent eight years in restaurants and more than six building her beauty and wellness practice — always staying close to her Sunset neighbors, from community meals to volunteer service.</p>
+        <blockquote>
+          <p data-i18n="home.founderQuote">“Care deeply. Serve professionally. Build relationships that last.”</p>
+        </blockquote>
+      </div>
+      <div class="recognition">
+        <p class="recognition-title" data-i18n="home.recTitle">Recognized for service to San Francisco</p>
+        <ul class="recognition-list">
+          <li><button type="button" data-lightbox="assets/images/certificate-of-honor.webp"><strong data-i18n="rec.1">Certificate of Honor</strong><span data-i18n="rec.1By">SF Board of Supervisors</span></button></li>
+          <li><button type="button" data-lightbox="assets/images/state-senate-recognition.webp"><strong data-i18n="rec.2">Certificate of Recognition</strong><span data-i18n="rec.2By">California State Senate</span></button></li>
+          <li><button type="button" data-lightbox="assets/images/civic-recognition.webp"><strong data-i18n="rec.3">Grand opening recognition</strong><span data-i18n="rec.3By">California State Controller</span></button></li>
+          <li><button type="button" data-lightbox="assets/images/community-appreciation-elaine.webp"><strong data-i18n="rec.4">Certificate of Appreciation</strong><span data-i18n="rec.4By">Love and Care Homeless Foundation</span></button></li>
+          <li><button type="button" data-lightbox="assets/images/sing-tao-coverage.webp"><strong data-i18n="rec.5">Featured in the press</strong><span data-i18n="rec.5By">Sing Tao Daily</span></button></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Visit -->
+    <section class="host-visit" id="visit" aria-labelledby="visit-title">
+      <div class="shell host-visit-grid">
+        <div>
+          <h2 id="visit-title" data-i18n="host.visitTitle" data-i18n-rich>Find us on <span class="hl">Noriega Street</span>, in the heart of the Sunset.</h2>
+          <dl class="visit-details">
+            <div><dt data-i18n="visit.address">Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=2560+Noriega+St%2C+San+Francisco%2C+CA+94122" target="_blank" rel="noopener">2560 Noriega St<br>San Francisco, CA 94122</a></dd></div>
+            <div><dt data-i18n="visit.hours">Hours</dt><dd><span data-i18n="host.openDaily">Open daily</span><br>9 AM–9 PM</dd></div>
+            <div><dt data-i18n="visit.phone">Phone</dt><dd><a href="tel:+14157124366">(415) 712-4366</a></dd></div>
+            <div><dt>WeChat</dt><dd class="placeholder-inline" data-i18n="common.tbd">TBD</dd></div>
+          </dl>
+          <div class="visit-actions">
+            <a class="button" href="#begin" data-i18n="cta.bookFirst">Book your first visit</a>
+            <a class="button button--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=2560+Noriega+St%2C+San+Francisco%2C+CA+94122" target="_blank" rel="noopener" data-i18n="cta.directions">Get directions</a>
+          </div>
+        </div>
+        <figure class="host-visit-photo" data-reveal>
+          <img src="assets/images/retail-and-community-space.webp" alt="Zenyra’s front room: shelves of wellness products beside the glowing butterfly wall" data-i18n-alt="host.studioAlt" width="2000" height="1500" loading="lazy">
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- Advisor module · "Desktop / 02 Conversation" (Figma node 72:2020). Opened from the hero composer, a prompt
+       chip or a service row; home-host.js grows it out of whatever opened it. Hidden until then. -->
+  <section class="advisor-module" id="advisor-module" aria-labelledby="am-title" hidden>
+    <h2 class="visually-hidden" id="am-title" data-i18n="am.title">Zenyra wellness advisor</h2>
+    <div class="shell am-body">
+      <div class="am-chat">
+        <div class="am-bar" data-am-reveal>
+          <button class="button button--ghost button--small am-back" type="button" data-am-close>
+            <img src="assets/icons/arrow-left.svg" alt="" width="16" height="16">
+            <span data-i18n="am.startOver">Start over</span>
+          </button>
+          <p class="ai-badge"><img src="assets/icons/sparkle.svg" alt="" width="16" height="16"><span data-i18n="host.aiBadge">Powered by wellness AI</span></p>
+          <div class="am-progress">
+            <p><span class="am-progress-step" data-am-step>Step 2 of 4</span> <span data-am-step-name>Where you feel it</span></p>
+            <div class="am-track" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="am-thread" data-am-thread aria-live="polite"></div>
+        <div class="am-compose" data-am-reveal>
+          <form class="composer" data-am-form>
+            <label class="visually-hidden" for="am-input" data-i18n="chat.label">Your question</label>
+            <input id="am-input" name="q" autocomplete="off" placeholder="Type your answer…" data-i18n-placeholder="am.placeholder">
+            <button class="composer-send" type="submit" aria-label="Send" data-i18n-aria="chat.send">
+              <img src="assets/icons/send.svg" alt="" width="20" height="20">
+            </button>
+          </form>
+          <p class="fine-print" data-i18n="chat.disclaimer">General wellness guidance only, not medical advice.</p>
+        </div>
+      </div>
+
+      <aside class="am-side">
+        <div class="am-card" data-am-reveal>
+          <h3 data-i18n="am.heardTitle">What we’ve heard</h3>
+          <p class="am-card-lede" data-i18n="am.heardLede">Your plan builds as you answer.</p>
+          <dl class="am-facts">
+            <div><dt data-i18n="am.factGoal">Goal</dt><dd data-am-fact="goal">—</dd></div>
+            <div><dt data-i18n="am.factWhere">Where</dt><dd data-am-fact="where">—</dd></div>
+            <div><dt data-i18n="am.factRoutine">Routine</dt><dd data-am-fact="routine">—</dd></div>
+          </dl>
+        </div>
+        <div class="am-card" data-am-reveal>
+          <h3 data-i18n="am.personTitle">Prefer to talk to a person?</h3>
+          <p class="am-card-lede" data-i18n="am.personBody">Call and we’ll book you directly. Open daily 9 AM–9 PM. We speak Mandarin, Cantonese, and English.</p>
+          <a class="button button--ghost am-call" href="tel:+14157124366">
+            <img src="assets/icons/phone.svg" alt="" width="20" height="20">
+            <span><span data-i18n="host.call">Call</span> (415) 712-4366</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="site-footer host-footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/zenyra-icon.png" alt="" width="56" height="56">
+        <p data-i18n="footer.line">Care that feels personal. Community that feels local.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer" data-i18n-aria="common.footerNav">
+        <a href="#services" data-i18n="nav.services">Services</a>
+        <a href="#membership" data-i18n="nav.membership">Membership</a>
+        <a href="gallery.html" data-i18n="nav.gallery">Gallery</a>
+        <a href="#visit" data-i18n="nav.visit">Visit</a>
+      </nav>
+      <p class="footer-meta"><span>2560 Noriega St, San Francisco · (415) 712-4366</span><span>© <span data-year></span> Zenyra San Francisco · <span data-i18n="footer.notMedical">Wellness guidance is not medical advice.</span></span></p>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" data-lightbox-dialog>
+    <button class="lightbox-close" type="button" data-lightbox-close data-i18n="common.close">Close</button>
+    <img src="assets/images/certificate-of-honor.webp" alt="" data-lightbox-img>
+    <p data-lightbox-caption></p>
+  </dialog>
+</body>
+</html>
