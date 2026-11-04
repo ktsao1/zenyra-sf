@@ -14,7 +14,8 @@ const mobileNav = document.querySelector('#mobile-nav');
 
 function setMenu(open) {
   menuToggle.setAttribute('aria-expanded', String(open));
-  menuToggle.textContent = i18n.t(open ? 'common.close' : 'common.menu');
+  // The label stays in the button (visually hidden on phones, where the icon shows) so it keeps its name.
+  (menuToggle.querySelector('.menu-label') ?? menuToggle).textContent = i18n.t(open ? 'common.close' : 'common.menu');
   mobileNav.hidden = !open;
 }
 

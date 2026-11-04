@@ -23,7 +23,7 @@ A quiet, near-achromatic page — white canvas, warm cream bands, ink type — w
 | `--line-strong` | `#cbcbcb` | Hairlines on cream, ghost-button border. |
 | `--placeholder` | `#8a5700` | Amber "◌ TBD" markers — functional, not brand. |
 
-Teal is punctuation: at most one highlighted phrase per heading, one filled button style. Don't add a second accent colour (the old coral "Most popular" flag is now teal-deep).
+Teal is punctuation: at most one highlighted phrase per heading, one filled button style. Don't add a second accent colour.
 
 ## Type
 
@@ -44,10 +44,10 @@ Shadows carry hierarchy: **the higher a surface sits, the more it matters right 
 
 | Level | Token | Meaning | Used on |
 |---|---|---|---|
-| 0 | — | Content | Bands, text, lists (Services, recognitions), photos |
-| 1 | `--shadow-1` | A card you can act on | Book online / Call cards, plan cards, the composer field, the advisor module's side cards, the scrolled header |
-| 2 | `--shadow-2` | What we want you to pick | The advisor card, the "Most popular" plan; any tilt card while the pointer holds it |
-| 3 | `--shadow-3` | Floats above the page | Lightbox, certificate preview, mobile menu, the advisor module's pinned composer; the featured plan while held |
+| 0 | — | Content | Bands, text, lists (Services, recognitions), photos, the advisor conversation and its side panel (kept flat so the chat stays quiet) |
+| 1 | `--shadow-1` | A card you can act on | Book online / Call cards, plan cards, the higher-tiers disclosure, the composer field (including the advisor module's pinned composer), the scrolled header |
+| 2 | `--shadow-2` | What we want you to pick | The advisor card; any tilt card while the pointer holds it |
+| 3 | `--shadow-3` | Floats above the page | Lightbox, certificate preview, mobile menu |
 
 The hero window casts a shadow while it peeks in tipped back, fading to none as it opens flat (`--p`). The header floats at level 1, not 3, so a full-width bar doesn't darken the page.
 
@@ -56,13 +56,13 @@ The hero window casts a shadow while it peeks in tipped back, fading to none as 
 - **Kicker** → retired everywhere (home 2026-11-04, gallery the same day): the headings name their sections. The `.kicker` style remains only for `index-old.html`; don't add new ones.
 - **Primary button** → teal-deep pill. **Ghost button** → transparent pill, silver border, ink text; on hover it fills with the *other* surface (`--ghost-hover`): white on cream bands, cream on white cards.
 - **Card** → white, 16px radius, `--card-pad` padding, level-1 shadow, no border; headings Inter 500 at `clamp(1.3rem, 1.8vw, 1.5rem)` (the advisor card's is the one larger exception).
-- **Header** → white and flat at the top; once the page scrolls it floats on `--shadow-1` (`.is-scrolled`, set in `main.js`). Wordmark in Inter 500, ink, wide tracking. Sticky is kept (deviation from Alden) so "Book" is always reachable.
+- **Header** → white and flat at the top; once the page scrolls it floats on `--shadow-1` (`.is-scrolled`, set in `main.js`). Wordmark in Inter 500, ink, wide tracking. Sticky is kept (deviation from Alden) so "Book" is always reachable, phones included: under 36rem the button shortens to "Book"/"预约", Menu becomes a two-line icon that crosses into a close mark (its label stays for screen readers), and under 24rem the wordmark drops beside the logo. Touch targets in the header are 44px.
 - **Section heads** → serif headline, short lede (centred or left with the column); no kicker on the new home.
-- **Featured tier** → white card raised to level 2 + teal-deep "Most popular" pill. **Start tier** → 1px teal outline.
+- **No featured tier** (the "Most popular" flag was removed 2026-11-04; no plan is singled out). **Start tier** → 1px teal outline.
 
 ## Layout rhythm
 
-Max width 75rem. Sections strictly alternate white canvas and cream bands, so the colour change marks each section and there are no section hairlines; no dark bands. Home (`index.html`, 2026-11-04): welcome hero (white, centred text and two CTAs over a slow idle drift of soft teal and sand blotches, `.hero-drift`, still with reduced motion; a wide room photo peeks in at the foot of the first screen and straddles the cream band below) → Three ways to begin (cream: the advisor's instant plan and quote as the large white card, Book online and Call beside it) → Services (white) → Membership (cream: all six plans as `.tier` cards, three across, then the call-or-visit line) → Founder + recognitions (white) → Visit (cream) → footer (white). The advisor is one way in, not the front door; everything after the ways to begin is secondary.
+Max width 75rem. Sections strictly alternate white canvas and cream bands, so the colour change marks each section and there are no section hairlines; no dark bands. Home (`index.html`, 2026-11-04): welcome hero (white, centred text and two CTAs over a slow idle drift of soft teal and sand blotches, `.hero-drift`, still with reduced motion; a wide room photo peeks in at the foot of the first screen and straddles the cream band below) → Three ways to begin (cream: the advisor's instant plan and quote as the large white card, Book online and Call beside it) → Services (white: rows show only their names; the open row (chosen, or pointed at / focused) unfolds its description and price, the text wiping in left to right and the price following behind a drawn teal rule; choosing a row shows that service's room or machine with a caption; services without a photo show a "Photo TBD" placeholder) → Membership (cream, framed as "after your first visit": four plans as `.tier` cards, four across, information only (no buttons: joining is by phone or in person), no plan singled out; the $3,980 and $9,800 consultation tiers folded into one `<details>` card below; then the call-or-visit line) → Founder + recognitions (white) → Visit (cream) → footer (white). The advisor is one way in, not the front door; everything after the ways to begin is secondary.
 
 ## Motion (home)
 

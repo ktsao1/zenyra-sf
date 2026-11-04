@@ -374,7 +374,7 @@
   document.addEventListener('zenyra:langchange', render);
 })();
 
-// ---------- Polish: photographs unveil on view; the Services photo follows the row in focus. ----------
+// ---------- Polish: photographs unveil on view; the Services photo follows the chosen row. ----------
 (() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -399,21 +399,35 @@
     setTimeout(() => photos.filter((el) => el.getBoundingClientRect().top < window.innerHeight).forEach(unveil), 1200);
   }
 
-  // Services: pointing at or focusing a row shows the room it happens in; leaving the list goes back.
+  // Services: the chosen row stays open (its description and price showing) and its room fills the photo.
+  // Pointing at or focusing another row opens it too and previews its room; leaving it folds it again.
   const stack = document.querySelector('.host-services-photo');
   const list = document.querySelector('.service-rows');
   if (!stack || !list) return;
-  const show = (name) => {
-    const target = stack.querySelector(`[data-photo="${name}"]`) ?? stack.querySelector('[data-photo="default"]');
-    stack.querySelectorAll('img').forEach((img) => img.classList.toggle('is-shown', img === target));
+  const rows = [...list.querySelectorAll('button[data-photo]')];
+  let chosen = rows.find((row) => row.getAttribute('aria-pressed') === 'true') ?? rows[0];
+  let preview = null;
+  const render = () => {
+    const shown = preview ?? chosen;
+    rows.forEach((row) => row.classList.toggle('is-open', row === chosen || row === preview));
+    stack.querySelectorAll('.svc-slide').forEach((slide) => slide.classList.toggle('is-shown', slide.dataset.photo === shown?.dataset.photo));
   };
-  list.querySelectorAll('button').forEach((row) => {
-    const name = row.dataset.photo ?? 'default';
-    row.addEventListener('pointerenter', () => show(name));
-    row.addEventListener('focus', () => show(name));
+  const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
+  rows.forEach((row) => {
+    row.addEventListener('pointerenter', () => { if (hover.matches) { preview = row; render(); } });
+    row.addEventListener('pointerleave', () => { if (preview === row) { preview = null; render(); } });
+    row.addEventListener('focus', () => { if (row.matches(':focus-visible')) { preview = row; render(); } });
+    row.addEventListener('blur', () => { if (preview === row) { preview = null; render(); } });
+    row.addEventListener('click', () => {
+      chosen = row;
+      preview = null;
+      rows.forEach((r) => r.setAttribute('aria-pressed', String(r === row)));
+      render();
+      // In one column the photo sits under the list: bring it into view so the change is seen.
+      const box = stack.getBoundingClientRect();
+      if (box.top > window.innerHeight || box.bottom < 0) stack.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'center' });
+    });
   });
-  list.addEventListener('pointerleave', () => show('default'));
-  list.addEventListener('focusout', (event) => { if (!list.contains(event.relatedTarget)) show('default'); });
 })();
 
 // ---------- Recognitions: a print of the certificate rises above the card in focus. ----------

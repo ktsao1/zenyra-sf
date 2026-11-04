@@ -45,7 +45,7 @@ html:has(.host-page) { scrollbar-color: var(--line-strong) var(--paper); }
    (removed in the distill pass, Kevin 2026-11-04; DESIGN.md records it). */
 .host-head { display: grid; justify-items: start; }
 .host-head p { margin-top: 1.25rem; font-size: 1.15rem; line-height: 1.55; color: var(--ink-soft); max-width: 36rem; }
-.host-head p, .host-lede, .service-rows span span { text-wrap: pretty; }
+.host-head p, .host-lede, .svc-desc { text-wrap: pretty; }
 .host-head--center p { text-wrap: balance; }
 .host-head--center { max-width: 46rem; margin: 0 auto clamp(2.5rem, 5vw, 4rem); text-align: center; justify-items: center; }
 .host-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
@@ -66,12 +66,12 @@ html:has(.host-page) { scrollbar-color: var(--line-strong) var(--paper); }
 .host-column h1 { max-width: 15ch; }
 /* The wordmark over the welcome (Kevin's Figma tweak, 2026-11-04): the header's lockup, centred, ZENYRA in the
    brand teal. Decorative: the header's link already names the studio, so it is aria-hidden. */
-.hero-mark { display: grid; justify-items: center; font-size: 1.05rem; font-weight: 500; line-height: 1; letter-spacing: .16em; color: var(--teal); }
-.hero-mark small { margin-top: .4rem; font-size: .68rem; font-weight: 400; letter-spacing: .04em; color: var(--ink-soft); }
-/* The lede's one highlighted phrase is the deep teal, quieter than the headline's. */
-.host-lede .hl { color: var(--teal-night); }
-html[lang="zh-Hans"] .host-column h1 { max-width: none; font-size: clamp(2.4rem, 4.6vw, 3.75rem); }
-.host-lede { font-size: clamp(1.1rem, 1.5vw, 1.25rem); line-height: 1.55; color: var(--ink-soft); max-width: 34rem; text-wrap: balance; }
+/* Small text, so it takes the deep teal (the brand teal fails contrast this small, DESIGN.md). */
+.hero-mark { display: grid; justify-items: center; font-size: 1.05rem; font-weight: 500; line-height: 1; letter-spacing: .16em; color: var(--teal-deep); }
+.hero-mark small { margin-top: .4rem; font-size: .75rem; font-weight: 400; letter-spacing: .04em; color: var(--ink-soft); }
+/* Chinese breaks only where the dictionary allows (<wbr>), so a narrow screen never strands the last character. */
+html[lang="zh-Hans"] .host-column h1 { max-width: none; font-size: clamp(2.4rem, 4.6vw, 3.75rem); word-break: keep-all; }
+.host-lede { font-size: clamp(1.1rem, 1.5vw, 1.25rem); line-height: 1.55; color: var(--ink-soft); max-width: 46rem; text-wrap: balance; }
 .host-column .host-actions { margin-top: .75rem; justify-content: center; }
 
 /* The drift: three soft blotches of the brand teal and a warm sand, each a radial gradient (no blur filter, so it
@@ -169,6 +169,11 @@ html.motion .host-hero { --p: 0; }
 .ai-badge img { flex: none; }
 .begin-card--advisor .ai-badge { margin-bottom: -1rem; }
 .am-bar .ai-badge { margin-right: auto; margin-left: .25rem; }
+/* In the conversation the bar stays quiet: the badge and "Start over" drop their pill chrome and read as text. */
+.am-bar .ai-badge { min-height: 0; padding: 0; border: 0; background: none; color: var(--ink-soft); font-weight: 400; }
+.am-bar .ai-badge img { opacity: .7; }
+.host-page .am-back { min-height: 2.25rem; padding-inline: .25rem .5rem; border-color: transparent; background: none; color: var(--ink-soft); }
+.host-page .am-back:hover { background: none; border-color: transparent; color: var(--ink); }
 
 /* ---------- Three ways to begin: the advisor's card is the largest; booking and calling stand beside it. ---------- */
 .host-begin { padding-block: clamp(4rem, 8vw, 6.5rem) var(--section); background: var(--cream); }
@@ -220,25 +225,47 @@ html[lang="zh-Hans"] :is(.begin-card, .plan-grid .tier) h3 { letter-spacing: 0; 
 }
 .host-chips button:hover { border-color: var(--teal-deep); color: var(--teal-deep); }
 
-
-/* ---------- Membership: all six plans as styles.css's .tier cards, on a cream band. ---------- */
+/* ---------- Membership: the four plans most guests choose between as styles.css's .tier cards, on a cream band;
+   the two consultation tiers folded into one disclosure under them. ---------- */
 /* A cream band, like "Three ways to begin": the bands now alternate (cream, white, cream, white, cream), so the
    changes of section need no hairlines, and the plans are the same borderless white cards as the begin cards. */
 .host-path { padding-block: var(--section); background: var(--cream); }
 .plan-grid .tier { padding: var(--card-pad); border-color: transparent; }
 /* The first visit keeps the site's one outlined card: "start here". */
 .plan-grid .tier--start { border-color: var(--teal); }
-/* Most popular is raised above its neighbours instead of tinted. */
-.plan-grid .tier--featured { background: var(--surface); --rest: var(--shadow-2); --lift: var(--shadow-3); }
-.plan-grid .tier--featured .tier-rule { border-color: var(--line); }
 .host-path .host-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
-/* Every plan as a card, three across (styles.css's .tier card). The cards in a row share a height; the price
-   rule and any action sit where the content ends. */
-.plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.plan-grid .tier-flag { top: 1.5rem; }
+/* Four plans, four across (styles.css's .tier card). The cards in a row share a height; the price rule and any
+   action sit where the content ends. */
+.plan-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+/* Each card shares the grid's rows (subgrid), so step labels, names, prices and rules line up across a row. */
+.plan-grid > .tier { grid-row: span 4; grid-template-rows: subgrid; }
+.plan-grid .tier-prices { align-content: start; }
+.plan-grid .tier-top { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem .75rem; }
 .plan-grid .tier > .tier-rule { color: var(--ink-soft); }
-@media (max-width: 60rem) { .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 68rem) { .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 36rem) { .plan-grid { grid-template-columns: minmax(0, 1fr); } }
+/* The higher tiers: one white card you open (level 1, it acts), a plus that turns into a close mark. */
+.tier-more { margin-top: 1rem; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-1); --ghost-hover: var(--cream); }
+.tier-more summary {
+  min-height: 3.75rem; padding: 1rem var(--card-pad); display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  list-style: none; border-radius: var(--radius); font-weight: 500; cursor: pointer; transition: color 300ms var(--ease-out);
+}
+.tier-more summary::-webkit-details-marker { display: none; }
+.tier-more summary::after {
+  content: ""; flex: none; width: .8rem; height: .8rem; color: var(--teal-deep);
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+  transition: rotate 400ms var(--ease-out);
+}
+.tier-more[open] summary::after { rotate: 45deg; }
+.tier-more summary:hover { color: var(--teal-deep); }
+.tier-more ul { margin: 0; padding: 0 var(--card-pad) var(--card-pad); list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2.5rem; }
+.tier-more li { padding-top: 1.25rem; border-top: 1px solid var(--line); display: grid; gap: .35rem; justify-items: start; align-content: start; }
+.tier-more li strong { margin-top: .25rem; font-size: clamp(1.2rem, 1.6vw, 1.35rem); font-weight: 500; letter-spacing: -.025em; }
+.tier-more-price { font-size: 2rem; letter-spacing: -.045em; line-height: 1.1; color: var(--teal); }
+.tier-more li > span:not(.tier-more-price, .placeholder-inline) { color: var(--ink-soft); }
+.tier-more .placeholder-inline { margin-top: .25rem; font-size: .9rem; }
+html[lang="zh-Hans"] .tier-more li strong { letter-spacing: 0; }
+@media (max-width: 36rem) { .tier-more ul { grid-template-columns: minmax(0, 1fr); } }
 /* Joining is a call or a visit (client's request): one quiet line of links under the plans, on a hairline. */
 .path-join { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line-strong); color: var(--ink-soft); }
 .path-join a { color: var(--teal-deep); font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: .3em; white-space: nowrap; }
@@ -248,26 +275,75 @@ html[lang="zh-Hans"] :is(.begin-card, .plan-grid .tier) h3 { letter-spacing: 0; 
 .host-services { padding-block: var(--section); }
 .host-services-grid { display: grid; grid-template-columns: minmax(0, 560fr) minmax(0, 560fr); gap: clamp(2.5rem, 6vw, 5rem); }
 /* The photo column is a stack: the room for the service in focus fades up over the last one. */
-.host-services-photo { position: relative; min-height: 34rem; border-radius: var(--radius-image); background: var(--cream); }
-.host-services-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
-.host-services-photo img.is-shown { opacity: 1; }
-.host-services-photo img:not(.is-shown) { transform: scale(1.04); }
+.host-services-photo { position: relative; min-height: 34rem; margin: 0; overflow: hidden; border-radius: var(--radius-image); background: var(--cream); }
+.svc-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 500ms var(--ease-out), visibility 0s 500ms; }
+.svc-slide.is-shown { opacity: 1; visibility: visible; transition: opacity 500ms var(--ease-out); }
+.svc-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
+.svc-slide:not(.is-shown) img { transform: scale(1.04); }
+/* Landscape photos keep the machine in frame when cropped to the tall column. */
+.svc-slide[data-photo="head"] img { object-position: 0 100%; }
+.svc-slide[data-photo="capsule"] img { object-position: 15% 50%; }
+/* The caption names the room or machine, on a white card at the foot of the photo. */
+.svc-slide figcaption {
+  position: absolute; left: 1rem; right: 1rem; bottom: 1rem; max-width: 24rem; padding: .85rem 1.1rem;
+  display: grid; gap: .2rem; border-radius: var(--radius); background: var(--paper);
+}
+.svc-slide figcaption strong { font-size: 1rem; font-weight: 500; letter-spacing: -.01em; }
+.svc-slide figcaption span { font-size: .875rem; line-height: 1.45; color: var(--ink-soft); text-wrap: pretty; }
+/* No photo yet: a placeholder fills the frame so it cannot ship unnoticed. */
+.svc-tbd-photo {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  border: 1.5px dashed var(--placeholder); border-radius: inherit; background: var(--placeholder-bg); color: var(--placeholder);
+}
+.svc-tbd-photo span { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .host-services-list { display: grid; align-content: start; gap: 2rem; }
 .service-rows button {
-  width: 100%; padding: 1.4rem 0; display: flex; align-items: center; gap: 1.5rem;
+  width: 100%; padding: 1.4rem 0; display: flex; align-items: flex-start; gap: 1.5rem;
   border: 0; border-bottom: 1px solid var(--fog); text-align: left; cursor: pointer;
-  /* A teal hairline draws across the row in focus, over its grey one. */
+  /* A teal hairline draws across the open row, over its grey one. */
   background: linear-gradient(var(--teal), var(--teal)) left bottom / 0 1px no-repeat;
   transition: background-size 600ms var(--ease-out);
 }
-.service-rows button:is(:hover, :focus-visible) { background-size: 100% 1px; }
+.service-rows button.is-open { background-size: 100% 1px; }
 .service-rows button:focus-visible { outline-offset: 6px; }
-.service-rows button > span { flex: 1; display: grid; gap: .25rem; }
-.service-rows strong { font-size: 1.125rem; font-weight: 500; line-height: 1.33; letter-spacing: -.02em; transition: color 300ms var(--ease-out); }
-.service-rows button > span > span { font-size: .9rem; line-height: 1.45; color: var(--ink-soft); }
-.service-rows img { flex: none; opacity: .6; transition: transform 450ms var(--ease-out), opacity 300ms var(--ease-out); }
-.service-rows button:is(:hover, :focus-visible) strong { color: var(--teal-deep); }
-.service-rows button:is(:hover, :focus-visible) img { opacity: 1; transform: translateX(.35rem); }
+.svc-main { flex: 1; display: grid; }
+.service-rows strong { font-size: 1.125rem; font-weight: 500; line-height: 1.33; letter-spacing: -.02em; transition: color 300ms var(--ease-out), letter-spacing 600ms var(--ease-out); }
+.service-rows img { flex: none; margin-top: .2rem; opacity: .6; transition: transform 450ms var(--ease-out), opacity 300ms var(--ease-out); }
+.service-rows button.is-open strong { color: var(--teal-deep); }
+.service-rows button.is-open img { opacity: 1; transform: translateX(.35rem); }
+
+/* Only the open row (pointed at, focused or chosen) shows its description and price. The detail unfolds from
+   nothing (grid rows 0fr → 1fr); inside it, the description rises out of a soft left-to-right wipe and the
+   price follows a beat later behind a teal rule that draws in first. Closing runs it all back, faster.
+   The text stays in the button's accessible name when folded: only its height and paint change. */
+.svc-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 420ms var(--ease-out); }
+.svc-detail-inner { min-height: 0; overflow: hidden; display: grid; justify-items: start; gap: .55rem; }
+.svc-desc {
+  padding-top: .35rem; font-size: .9rem; line-height: 1.45; color: var(--ink-soft);
+  opacity: 0; transform: translateY(.6rem);
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%); mask-image: linear-gradient(90deg, #000 40%, transparent 60%);
+  -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0;
+  transition: opacity 250ms var(--ease-out), transform 300ms var(--ease-out), -webkit-mask-position 300ms var(--ease-out), mask-position 300ms var(--ease-out);
+}
+.svc-price {
+  position: relative; padding-left: 1.6rem; font-size: .85rem; font-weight: 500; letter-spacing: .01em; color: var(--teal-deep);
+  opacity: 0; transform: translateX(-.5rem);
+  transition: opacity 200ms var(--ease-out), transform 300ms var(--ease-out);
+}
+.svc-price::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 1.1rem; height: 1px; background: var(--teal);
+  transform: scaleX(0); transform-origin: left; transition: transform 300ms var(--ease-out);
+}
+/* An unconfirmed price keeps the placeholder's ◌ mark in place of the rule. */
+.svc-price--tbd { padding-left: 0; font-weight: 600; color: var(--placeholder); }
+.svc-price--tbd::before { content: "◌ "; position: static; width: auto; height: auto; background: none; transform: none; }
+.service-rows button.is-open .svc-detail { grid-template-rows: 1fr; transition-duration: 600ms; }
+.service-rows button.is-open .svc-desc {
+  opacity: 1; transform: none; -webkit-mask-position: 0 0; mask-position: 0 0;
+  transition-duration: 500ms, 700ms, 900ms, 900ms; transition-delay: 120ms;
+}
+.service-rows button.is-open .svc-price { opacity: 1; transform: none; transition-duration: 450ms, 600ms; transition-delay: 520ms; }
+.service-rows button.is-open .svc-price::before { transform: scaleX(1); transition-duration: 500ms; transition-delay: 380ms; }
 
 /* ---------- Founder + recognitions: styles.css's .founder, as on the previous home. ---------- */
 /* Recognitions as plain entries on hairlines rather than five bordered boxes. */
@@ -330,18 +406,22 @@ html.am-open { overflow: hidden; }
 .am-bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .am-back img { flex: none; }
 .am-progress { width: min(20rem, 100%); display: grid; gap: .5rem; }
-.am-progress p { font-size: .875rem; font-weight: 500; color: var(--ink-soft); }
-.am-progress-step { color: var(--teal-deep); margin-right: .35rem; }
+.am-progress p { font-size: .8125rem; font-weight: 400; color: var(--ink-soft); }
+.am-progress-step { color: var(--ink); font-weight: 500; margin-right: .35rem; }
 .am-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; }
-.am-track i { height: 4px; border-radius: 2px; background: var(--fog); transition: background-color 400ms var(--ease); }
+.am-track i { height: 2px; border-radius: 1px; background: var(--fog); transition: background-color 400ms var(--ease); }
 .am-track i.is-done { background: var(--teal); }
 
 .am-thread { flex: 1; display: grid; align-content: start; gap: 1.5rem; }
 .am-msg { display: flex; gap: .75rem; align-items: flex-start; }
-.am-avatar { flex: none; width: 2rem; height: 2rem; padding: .2rem; border: 1px solid var(--fog); border-radius: var(--radius-pill); background: var(--paper); }
+.am-avatar { flex: none; width: 2rem; height: 2rem; padding: .2rem; }
 .am-bubble { max-width: 32.5rem; padding: 1rem 1.25rem; display: grid; gap: .25rem; background: var(--surface); border-radius: var(--radius-sm) var(--radius) var(--radius) var(--radius); font-size: 1rem; line-height: 1.5; }
 .am-who { font-size: .75rem; font-weight: 500; line-height: 1.33; letter-spacing: .02em; color: var(--ink-soft); }
 .am-msg--guest { justify-content: flex-end; }
+/* The advisor is named once, on its first message; after that the leaf says who is speaking. The name stays
+   for screen readers. Consecutive advisor messages drop the repeated leaf too. */
+.am-msg--ai ~ .am-msg--ai .am-who { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.am-msg--ai + .am-msg--ai .am-avatar { visibility: hidden; }
 .am-msg--guest .am-bubble { padding: .75rem 1.25rem; background: var(--teal-deep); color: #fff; border-radius: var(--radius) var(--radius-sm) var(--radius) var(--radius); }
 .am-typing { display: inline-flex; gap: .3rem; padding-block: .45rem; }
 .am-typing i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--ink-soft); opacity: .35; animation: am-dot 1s var(--ease) infinite; }
@@ -368,8 +448,10 @@ html.am-open { overflow: hidden; }
 .am-compose { position: sticky; bottom: 0; padding-block: 1rem 2rem; display: grid; gap: .75rem; text-align: center; background: linear-gradient(transparent, var(--cream) 1.25rem); }
 
 .am-side { position: sticky; top: 3rem; display: grid; gap: 1.5rem; }
-.am-card { padding: 2rem; display: grid; gap: 1rem; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-1); }
-.am-compose .composer { box-shadow: var(--shadow-3); }
+.am-card { padding: 2rem; display: grid; gap: 1rem; background: var(--surface); border-radius: var(--radius); }
+/* The second card is a footnote to the conversation, not a peer of the plan: no card, just text on cream. */
+.am-card + .am-card { padding-block: 0; background: none; }
+.am-compose .composer { box-shadow: var(--shadow-1); }
 .am-card h3 { font-size: 1.125rem; line-height: 1.33; }
 .am-card-lede { margin-top: -.75rem; font-size: .875rem; line-height: 1.43; color: var(--ink-soft); }
 .am-facts { margin-top: .5rem; display: grid; gap: 1rem; }
@@ -421,7 +503,9 @@ html.motion .founder-copy blockquote.steep.is-steeped { background-size: 2px 100
   .hero-drift { translate: none; }
   [data-tilt] { transform: none; }
   [data-reveal], [data-reveal] img, .service-rows button, .host-page .site-nav a { transition-property: opacity, color, background-size; }
-  .host-services-photo img:not(.is-shown) { transform: none; }
+  .svc-desc, .svc-price, .svc-price::before { transform: none; -webkit-mask-image: none; mask-image: none; }
+  .svc-detail { transition: none; }
+  .svc-slide:not(.is-shown) img { transform: none; }
   .am-in, .am-typing i { animation: none; }
   .am-typing i { opacity: .6; }
 }
