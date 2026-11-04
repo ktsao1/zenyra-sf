@@ -527,21 +527,6 @@
   }
 
   if (fine) {
-    // Hero buttons: pulled a few px toward the pointer when it comes near, released on leave.
-    document.querySelectorAll('[data-magnet]').forEach((el) => {
-      const zone = el.parentElement;
-      zone.addEventListener('pointermove', (event) => {
-        const r = el.getBoundingClientRect();
-        const dx = event.clientX - (r.left + r.width / 2);
-        const dy = event.clientY - (r.top + r.height / 2);
-        const reach = Math.hypot(dx, dy) < r.width * .9;
-        el.classList.toggle('is-pulled', reach);
-        el.style.setProperty('--tx', reach ? `${(dx * .18).toFixed(1)}px` : '0px');
-        el.style.setProperty('--ty', reach ? `${(dy * .28).toFixed(1)}px` : '0px');
-      });
-      zone.addEventListener('pointerleave', () => { el.classList.remove('is-pulled'); el.style.setProperty('--tx', '0px'); el.style.setProperty('--ty', '0px'); });
-    });
-
     // Cards: a turn of a few degrees toward the pointer and a light under it. [data-glow] takes only the light.
     document.querySelectorAll('[data-tilt], [data-glow]').forEach((el) => {
       const tilts = el.hasAttribute('data-tilt');

@@ -130,9 +130,6 @@ html.motion .host-hero { --p: 0; }
 /* The drift answers the pointer a little, so the room feels like it has air in it. */
 .hero-drift { translate: calc(var(--mx, 0) * 2.5rem) calc(var(--my, 0) * 2rem); transition: translate 1200ms var(--ease-out); }
 
-/* Hero buttons lean toward the pointer (home-host.js writes --tx/--ty; a few px at most). */
-[data-magnet] { translate: var(--tx, 0) var(--ty, 0); transition: translate 500ms var(--ease-out), background-color 300ms var(--ease-out), border-color 300ms var(--ease-out), color 300ms var(--ease-out), transform 160ms var(--ease-out); }
-[data-magnet].is-pulled { transition-duration: 120ms, 300ms, 300ms, 300ms, 160ms; }
 
 /* ---------- Cards that answer the pointer: a small turn in perspective toward it, with a soft teal light under
    the pointer (--gx/--gy). Fine pointers only, motion allowed; the advisor card takes the light but never turns,
@@ -421,7 +418,7 @@ html.motion .founder-copy blockquote.steep.is-steeped { background-size: 2px 100
 
 @media (prefers-reduced-motion: reduce) {
   .hero-drift i, .host-column > *, .host-window, [data-deal].is-dealt > li { animation: none; }
-  .hero-drift, [data-magnet] { translate: none; }
+  .hero-drift { translate: none; }
   [data-tilt] { transform: none; }
   [data-reveal], [data-reveal] img, .service-rows button, .host-page .site-nav a { transition-property: opacity, color, background-size; }
   .host-services-photo img:not(.is-shown) { transform: none; }
