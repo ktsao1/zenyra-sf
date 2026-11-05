@@ -44,8 +44,8 @@ Shadows carry hierarchy: **the higher a surface sits, the more it matters right 
 
 | Level | Token | Meaning | Used on |
 |---|---|---|---|
-| 0 | — | Content | Bands, text, lists (Services, recognitions), photos, the advisor conversation and its side panel (kept flat so the chat stays quiet) |
-| 1 | `--shadow-1` | A card you can act on | Book online / Call cards, plan cards, the higher-tiers disclosure, the composer field (including the advisor module's pinned composer), the scrolled header |
+| 0 | — | Content | Bands, text, lists (Services, recognitions), photos, the advisor conversation and its side panel (kept flat so the chat stays quiet: advisor messages are plain text beside the leaf, the side panel is facts on hairlines) |
+| 1 | `--shadow-1` | A card you can act on | Book online / Call cards, plan cards, the higher-tiers disclosure, the composer field (including the advisor module's composer, docked across the full width of its bottom edge), the scrolled header |
 | 2 | `--shadow-2` | What we want you to pick | The advisor card; any tilt card while the pointer holds it |
 | 3 | `--shadow-3` | Floats above the page | Lightbox, certificate preview, mobile menu |
 
@@ -67,6 +67,8 @@ Max width 75rem. Sections strictly alternate white canvas and cream bands, so th
 ## Motion (home)
 
 One authored moment: **the window into the studio.** The hero's room photo peeks in at the foot of the first screen as a small pane tipped back in perspective; scrolling straightens it and widens it to the full width while the photo inside settles from a slow zoom and the welcome text steps back (`--p` on `.host-hero`, written by `home-host.js`). Supporting motion stays small: the welcome comes into focus from a blur on arrival, the colour drift and the two hero buttons lean toward the pointer, the ways-to-begin and membership cards turn a few degrees toward the pointer with a soft teal light under it (the advisor card takes only the light), and the membership tiers are dealt up into place once. Easing is `--ease-out` (`cubic-bezier(.16, 1, .3, 1)`). Pointer effects run on fine pointers only; with reduced motion none of it runs and the page is flat and still.
+
+**Advisor module (home):** opens on the hero's light, not a cream band: white with the same teal and sand drift held fixed behind the conversation (`.am-drift`). The "Powered by wellness AI" label sits with the disclaimer under the composer.
 
 **Steeping (home):** each heading's teal phrase arrives in ink and steeps into teal over ~2s the first time it comes into view (the hero's after the welcome focuses in); the founder's quote draws its teal rule down the same way. The composer's send button rests a shade lighter while the field is empty.
 

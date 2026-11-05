@@ -168,10 +168,8 @@ html.motion .host-hero { --p: 0; }
 }
 .ai-badge img { flex: none; }
 .begin-card--advisor .ai-badge { margin-bottom: -1rem; }
-.am-bar .ai-badge { margin-right: auto; margin-left: .25rem; }
-/* In the conversation the bar stays quiet: the badge and "Start over" drop their pill chrome and read as text. */
-.am-bar .ai-badge { min-height: 0; padding: 0; border: 0; background: none; color: var(--ink-soft); font-weight: 400; }
-.am-bar .ai-badge img { opacity: .7; }
+/* In the conversation the bar stays quiet: "Start over" drops its pill chrome and reads as text; the AI label
+   moves down beside the disclaimer under the composer. */
 .host-page .am-back { min-height: 2.25rem; padding-inline: .25rem .5rem; border-color: transparent; background: none; color: var(--ink-soft); }
 .host-page .am-back:hover { background: none; border-color: transparent; color: var(--ink); }
 
@@ -393,16 +391,27 @@ html[lang="zh-Hans"] .tier-more li strong { letter-spacing: 0; }
 }
 
 /* ---------- Advisor module (Figma 72:2020) ----------
-   A layer under the sticky header, on cream, that home-host.js grows out of whatever opened it (clip-path)
-   and shrinks back into on close. The page under it is inert while it is open. */
+   A layer under the sticky header that home-host.js grows out of whatever opened it (clip-path) and shrinks
+   back into on close. The page under it is inert while it is open. It opens on the hero's light: white, with
+   the same slow teal and sand drift held still behind the conversation (.am-drift is fixed, so it never
+   scrolls away). Layout: conversation left, what-we've-heard right, and the composer docked across both. */
 html.am-open { overflow: hidden; }
 .advisor-module {
   position: fixed; inset: var(--header-h) 0 0; z-index: 40;
   overflow-y: auto; overscroll-behavior: contain;
-  background: var(--cream);
+  background: var(--paper);
 }
-.am-body { padding-block: 3rem 0; display: grid; grid-template-columns: minmax(0, 1fr) 25rem; gap: 3rem; align-items: start; }
-.am-chat { min-height: calc(100svh - var(--header-h) - 3rem); display: flex; flex-direction: column; gap: 2rem; }
+.am-drift { position: fixed; inset: var(--header-h) 0 0; height: auto; z-index: 0; overflow: hidden; }
+.am-drift i:nth-child(1) { left: -12rem; top: -16rem; }
+.am-drift i:nth-child(2) { right: -16rem; top: -6rem; }
+.am-drift i:nth-child(3) { left: 38%; top: 30%; }
+.am-body {
+  position: relative; z-index: 1;
+  min-height: calc(100svh - var(--header-h));
+  padding-top: 2.5rem; display: grid; grid-template-columns: minmax(0, 1fr) 21rem; grid-template-rows: 1fr auto;
+  grid-template-areas: "chat side" "compose compose"; column-gap: clamp(3rem, 6vw, 6rem); align-items: start;
+}
+.am-chat { grid-area: chat; display: flex; flex-direction: column; gap: 2.5rem; padding-bottom: 2rem; }
 .am-bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .am-back img { flex: none; }
 .am-progress { width: min(20rem, 100%); display: grid; gap: .5rem; }
@@ -415,14 +424,16 @@ html.am-open { overflow: hidden; }
 .am-thread { flex: 1; display: grid; align-content: start; gap: 1.5rem; }
 .am-msg { display: flex; gap: .75rem; align-items: flex-start; }
 .am-avatar { flex: none; width: 2rem; height: 2rem; padding: .2rem; }
-.am-bubble { max-width: 32.5rem; padding: 1rem 1.25rem; display: grid; gap: .25rem; background: var(--surface); border-radius: var(--radius-sm) var(--radius) var(--radius) var(--radius); font-size: 1rem; line-height: 1.5; }
+/* The advisor speaks in plain text beside the leaf, with no bubble; only the guest's replies are filled. */
+.am-bubble { max-width: 36rem; display: grid; gap: .2rem; font-size: 1.0625rem; line-height: 1.55; text-wrap: pretty; }
+.am-msg--ai .am-bubble { padding-top: .3rem; }
 .am-who { font-size: .75rem; font-weight: 500; line-height: 1.33; letter-spacing: .02em; color: var(--ink-soft); }
 .am-msg--guest { justify-content: flex-end; }
 /* The advisor is named once, on its first message; after that the leaf says who is speaking. The name stays
    for screen readers. Consecutive advisor messages drop the repeated leaf too. */
 .am-msg--ai ~ .am-msg--ai .am-who { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .am-msg--ai + .am-msg--ai .am-avatar { visibility: hidden; }
-.am-msg--guest .am-bubble { padding: .75rem 1.25rem; background: var(--teal-deep); color: #fff; border-radius: var(--radius) var(--radius-sm) var(--radius) var(--radius); }
+.am-msg--guest .am-bubble { max-width: 30rem; padding: .7rem 1.2rem; background: var(--teal-deep); color: #fff; font-size: 1rem; border-radius: 1.25rem 1.25rem var(--radius-sm) 1.25rem; }
 .am-typing { display: inline-flex; gap: .3rem; padding-block: .45rem; }
 .am-typing i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--ink-soft); opacity: .35; animation: am-dot 1s var(--ease) infinite; }
 .am-typing i:nth-child(2) { animation-delay: .15s; }
@@ -445,29 +456,39 @@ html.am-open { overflow: hidden; }
 .am-replies button:disabled:not([aria-pressed="true"]) { opacity: .5; }
 .am-actions { padding-left: 2.75rem; display: flex; flex-wrap: wrap; gap: .75rem; }
 
-.am-compose { position: sticky; bottom: 0; padding-block: 1rem 2rem; display: grid; gap: .75rem; text-align: center; background: linear-gradient(transparent, var(--cream) 1.25rem); }
+/* Docked across the whole bottom edge. The fade behind it is white, so the thread scrolls out under it cleanly. */
+.am-compose {
+  grid-area: compose; position: sticky; bottom: 0; z-index: 2;
+  padding-block: 1.5rem 1.25rem; display: grid; gap: .75rem;
+  background: linear-gradient(color-mix(in srgb, var(--paper) 0%, transparent), var(--paper) 1.5rem);
+}
+.am-compose .composer { min-height: 4.25rem; box-shadow: var(--shadow-1); }
+.am-note { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1rem; font-size: .8rem; }
+.am-note-ai { display: inline-flex; align-items: center; gap: .35rem; color: var(--teal-deep); }
 
-.am-side { position: sticky; top: 3rem; display: grid; gap: 1.5rem; }
-.am-card { padding: 2rem; display: grid; gap: 1rem; background: var(--surface); border-radius: var(--radius); }
-/* The second card is a footnote to the conversation, not a peer of the plan: no card, just text on cream. */
-.am-card + .am-card { padding-block: 0; background: none; }
-.am-compose .composer { box-shadow: var(--shadow-1); }
+/* The side panel is the plan taking shape, not a card: a heading, then the facts on hairlines. Calling is a
+   footnote under it. */
+.am-side { grid-area: side; position: sticky; top: 2.5rem; display: grid; gap: 2.5rem; padding-top: .25rem; }
+.am-card { display: grid; gap: 1rem; }
 .am-card h3 { font-size: 1.125rem; line-height: 1.33; }
 .am-card-lede { margin-top: -.75rem; font-size: .875rem; line-height: 1.43; color: var(--ink-soft); }
-.am-facts { margin-top: .5rem; display: grid; gap: 1rem; }
-.am-facts dt { font-size: .75rem; font-weight: 500; line-height: 1.33; letter-spacing: .02em; color: var(--ink-soft); }
-.am-facts dd { margin-top: .25rem; font-size: 1rem; line-height: 1.5; }
+.am-facts { margin-top: .25rem; display: grid; border-top: 1px solid var(--line); }
+.am-facts > div { padding-block: .85rem; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1rem; align-items: baseline; }
+.am-facts dt { font-size: .8125rem; font-weight: 500; line-height: 1.4; color: var(--ink-soft); }
+.am-facts dd { font-size: .9375rem; line-height: 1.45; }
+.am-card--person h3 { font-size: 1rem; }
 .am-facts dd.is-pending { color: var(--ink-soft); }
 .am-call { width: 100%; }
+.host-page .am-card--person .am-call:hover { background: var(--cream); }
 
 /* Entrances for messages added after the module has opened. */
 .am-in { animation: am-in 420ms var(--ease) both; }
 @keyframes am-in { from { opacity: 0; transform: translateY(.75rem); } }
 
 @media (max-width: 60rem) {
-  .am-body { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
-  .am-side { position: static; padding-bottom: 2rem; }
-  .am-chat { min-height: calc(100svh - var(--header-h) - 1.5rem); }
+  .am-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; grid-template-areas: "chat" "compose" "side"; padding-top: 1.5rem; }
+  .am-side { position: static; padding-block: 1.5rem 2.5rem; }
+  .am-chat { min-height: calc(100svh - var(--header-h) - 9.5rem); }
 }
 
 @media (max-width: 36rem) {
@@ -476,6 +497,8 @@ html.am-open { overflow: hidden; }
   .am-back { align-self: flex-start; }
   .am-bubble { max-width: 17.5rem; }
   .am-replies, .am-actions { padding-left: 0; }
+  .am-compose { padding-block: 1rem .75rem; gap: .5rem; }
+  .am-note { gap: 0 .75rem; font-size: .75rem; }
   .am-replies button { min-height: 2.75rem; }
 }
 

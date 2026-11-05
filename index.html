@@ -285,6 +285,8 @@
        chip or a service row; home-host.js grows it out of whatever opened it. Hidden until then. -->
   <section class="advisor-module" id="advisor-module" aria-labelledby="am-title" hidden>
     <h2 class="visually-hidden" id="am-title" data-i18n="am.title">Zenyra wellness advisor</h2>
+    <!-- The hero's drift, carried into the conversation so it opens on the same light, airy room. -->
+    <div class="hero-drift am-drift" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="shell am-body">
       <div class="am-chat">
         <div class="am-bar" data-am-reveal>
@@ -292,23 +294,23 @@
             <img src="assets/icons/arrow-left.svg" alt="" width="16" height="16">
             <span data-i18n="am.startOver">Start over</span>
           </button>
-          <p class="ai-badge"><img src="assets/icons/sparkle.svg" alt="" width="16" height="16"><span data-i18n="host.aiBadge">Powered by wellness AI</span></p>
           <div class="am-progress">
             <p><span class="am-progress-step" data-am-step>Step 2 of 4</span> <span data-am-step-name>Where you feel it</span></p>
             <div class="am-track" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
         <div class="am-thread" data-am-thread aria-live="polite"></div>
-        <div class="am-compose" data-am-reveal>
-          <form class="composer" data-am-form>
-            <label class="visually-hidden" for="am-input" data-i18n="chat.label">Your question</label>
-            <input id="am-input" name="q" autocomplete="off" placeholder="Type your answer…" data-i18n-placeholder="am.placeholder">
-            <button class="composer-send" type="submit" aria-label="Send" data-i18n-aria="chat.send">
-              <img src="assets/icons/send.svg" alt="" width="20" height="20">
-            </button>
-          </form>
-          <p class="fine-print" data-i18n="chat.disclaimer">General wellness guidance only, not medical advice.</p>
-        </div>
+      </div>
+      <!-- The composer spans the whole bottom edge, under the conversation and the side panel. -->
+      <div class="am-compose" data-am-reveal>
+        <form class="composer" data-am-form>
+          <label class="visually-hidden" for="am-input" data-i18n="chat.label">Your question</label>
+          <input id="am-input" name="q" autocomplete="off" placeholder="Type your answer…" data-i18n-placeholder="am.placeholder">
+          <button class="composer-send" type="submit" aria-label="Send" data-i18n-aria="chat.send">
+            <img src="assets/icons/send.svg" alt="" width="20" height="20">
+          </button>
+        </form>
+        <p class="fine-print am-note"><span class="am-note-ai"><img src="assets/icons/sparkle.svg" alt="" width="14" height="14"><span data-i18n="host.aiBadge">Powered by wellness AI</span></span><span data-i18n="chat.disclaimer">General wellness guidance only, not medical advice.</span></p>
       </div>
 
       <aside class="am-side">
@@ -321,7 +323,7 @@
             <div><dt data-i18n="am.factRoutine">Routine</dt><dd data-am-fact="routine">—</dd></div>
           </dl>
         </div>
-        <div class="am-card" data-am-reveal>
+        <div class="am-card am-card--person" data-am-reveal>
           <h3 data-i18n="am.personTitle">Prefer to talk to a person?</h3>
           <p class="am-card-lede" data-i18n="am.personBody">Call and we’ll book you directly. Open daily 9 AM–9 PM. We speak Mandarin, Cantonese, and English.</p>
           <a class="button button--ghost am-call" href="tel:+14157124366">
