@@ -117,9 +117,12 @@ html[lang="zh-Hans"] .kicker { font-size: .85rem; letter-spacing: .04em; }
 .site-nav a[aria-current="page"] { font-weight: 500; box-shadow: inset 0 -2px var(--teal); }
 .header-actions { margin-left: auto; display: flex; align-items: center; gap: .75rem; }
 .site-nav + .header-actions { margin-left: 0; }
-.lang-switch { display: inline-flex; padding: .2rem; border: 1px solid var(--line); border-radius: var(--radius-pill); }
-.lang-switch button { min-width: 2.75rem; min-height: 2.75rem; padding: 0 .6rem; border: 0; border-radius: var(--radius-pill); background: none; font-size: .85rem; font-weight: 500; color: var(--ink-soft); cursor: pointer; }
-.lang-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+/* Header controls share one height, 2.75rem (44px): the switch, Book and Menu. The switch's outline is an inset
+   shadow, so its buttons fill the full 44px as touch targets; a transparent border insets each fill 4px. */
+.lang-switch { display: inline-flex; height: 2.75rem; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1px var(--line); }
+.header-actions .button--small { min-height: 2.75rem; }
+.lang-switch button { min-width: 2.75rem; height: 2.75rem; padding: 0 .35rem; border: .25rem solid transparent; background-clip: padding-box; border-radius: var(--radius-pill); background-color: transparent; font-size: .85rem; font-weight: 500; color: var(--ink-soft); cursor: pointer; }
+.lang-switch button[aria-pressed="true"] { background-color: var(--ink); color: var(--paper); }
 .menu-toggle { display: none; min-height: 2.75rem; padding: 0 1rem; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: none; font-weight: 500; color: var(--ink); cursor: pointer; }
 /* On phones the toggle is an icon (its label stays for screen readers): two lines that cross into a close mark. */
 .menu-icon { display: none; position: relative; width: 1.125rem; height: .75rem; }
@@ -399,7 +402,7 @@ html[lang="zh-Hans"] .tier h2 { letter-spacing: 0; }
   .menu-icon { display: block; }
   .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .footer-nav { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; }
-  .lang-switch button { min-width: 2.75rem; height: 2.75rem; padding: 0 .35rem; }
+  .lang-switch button { padding: 0 .15rem; }
   .offer-cards, .visit-steps, .path-steps, .perks, .recognition-list, .tier-group, .visit-details { grid-template-columns: minmax(0, 1fr); }
   .visit-steps li { padding: 1.25rem 0 0 !important; border-left: 0 !important; }
   .approach-points li { grid-template-columns: minmax(0, 1fr); }
@@ -432,8 +435,8 @@ html[lang="zh-Hans"] .tier h2 { letter-spacing: 0; }
 .lang-switch { position: relative; isolation: isolate; }
 .lang-switch button { transition: color 300ms var(--ease); }
 .lang-switch.is-sliding::before {
-  content: ""; position: absolute; z-index: -1; top: .2rem; bottom: .2rem; left: 0;
-  width: var(--lang-w, 0); translate: var(--lang-x, 0) 0;
+  content: ""; position: absolute; z-index: -1; top: .25rem; bottom: .25rem; left: .25rem;
+  width: calc(var(--lang-w, 0px) - .5rem); translate: var(--lang-x, 0) 0;
   border-radius: var(--radius-pill); background: var(--ink); pointer-events: none;
 }
 .lang-switch.is-ready::before { transition: translate 480ms var(--ease), width 480ms var(--ease); }

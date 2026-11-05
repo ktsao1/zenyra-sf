@@ -518,9 +518,7 @@ html.motion .founder-copy blockquote.steep.is-steeped { background-size: 2px 100
 
 /* The send button rests a shade lighter while the field is empty, and comes up to full teal as you type:
    it says when there is something to send. */
-.composer-send img { transition: transform 450ms var(--ease-out); }
 .composer:has(input:placeholder-shown) .composer-send { background: color-mix(in srgb, var(--teal-deep) 72%, var(--paper)); } /* white arrow stays ≥3:1 (WCAG 1.4.11) */
-.composer:has(input:placeholder-shown) .composer-send img { transform: translateY(.15rem); }
 .composer:has(input:placeholder-shown) .composer-send:hover { background: color-mix(in srgb, var(--teal-deep) 85%, var(--paper)); }
 
 @media (prefers-reduced-motion: reduce) {
