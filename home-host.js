@@ -523,7 +523,12 @@
       hero.style.setProperty('--p-text', clamp(p * 1.35).toFixed(4));
     };
     const request = () => { if (visible && !frame) frame = requestAnimationFrame(update); };
-    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) request(); }).observe(hero);
+    // Off screen, the hero also rests its colour drift (.is-away), so three large layers aren't animating unseen.
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      hero.classList.toggle('is-away', !visible);
+      if (visible) request();
+    }).observe(hero);
     window.addEventListener('scroll', request, { passive: true });
     window.addEventListener('resize', measure);
     window.addEventListener('load', measure);

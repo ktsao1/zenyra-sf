@@ -21,6 +21,7 @@ A quiet, near-achromatic page — white canvas, warm cream bands, ink type — w
 | `--cream` | `#f3f1eb` | The second surface: full-width bands and whole containers, never partial tints. |
 | `--fog` / `--line` | `#dddcdd` | Hairlines, badge fill. |
 | `--line-strong` | `#cbcbcb` | Hairlines on cream, ghost-button border. |
+| `--sand` | `#d9c6a3` | Warm drift colour behind the home hero and the advisor. Atmosphere only, never text or a fill. |
 | `--placeholder` | `#8a5700` | Amber "◌ TBD" markers — functional, not brand. |
 
 Teal is punctuation: at most one highlighted phrase per heading, one filled button style. Don't add a second accent colour.

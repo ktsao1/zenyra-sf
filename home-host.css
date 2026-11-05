@@ -80,7 +80,9 @@ html[lang="zh-Hans"] .host-column h1 { max-width: none; font-size: clamp(2.4rem,
 .hero-drift { position: absolute; inset: 0 0 auto; height: calc(100svh - var(--header-h)); z-index: -1; pointer-events: none; }
 .hero-drift i { position: absolute; width: 46rem; aspect-ratio: 1; border-radius: 50%; will-change: transform; }
 .hero-drift i:nth-child(1) { left: -10rem; top: -14rem; background: radial-gradient(closest-side, color-mix(in srgb, var(--teal) 20%, transparent), transparent); animation: drift-a 26s ease-in-out infinite alternate; }
-.hero-drift i:nth-child(2) { right: -14rem; top: 2rem; background: radial-gradient(closest-side, color-mix(in srgb, #d9c6a3 45%, transparent), transparent); animation: drift-b 32s ease-in-out infinite alternate; }
+.hero-drift i:nth-child(2) { right: -14rem; top: 2rem; background: radial-gradient(closest-side, color-mix(in srgb, var(--sand) 45%, transparent), transparent); animation: drift-b 32s ease-in-out infinite alternate; }
+/* Rests while the hero is scrolled away (home-host.js sets .is-away); picks up where it left off. */
+.host-hero.is-away .hero-drift i { animation-play-state: paused; will-change: auto; }
 .hero-drift i:nth-child(3) { left: 30%; top: 40%; width: 38rem; background: radial-gradient(closest-side, color-mix(in srgb, var(--teal) 12%, transparent), transparent); animation: drift-c 22s ease-in-out infinite alternate; }
 @keyframes drift-a { to { transform: translate(18rem, 10rem) scale(1.15); } }
 @keyframes drift-b { to { transform: translate(-16rem, 8rem) scale(.9); } }
@@ -433,7 +435,7 @@ html.am-open { overflow: hidden; }
    for screen readers. Consecutive advisor messages drop the repeated leaf too. */
 .am-msg--ai ~ .am-msg--ai .am-who { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .am-msg--ai + .am-msg--ai .am-avatar { visibility: hidden; }
-.am-msg--guest .am-bubble { max-width: 30rem; padding: .7rem 1.2rem; background: var(--teal-deep); color: #fff; font-size: 1rem; border-radius: 1.25rem 1.25rem var(--radius-sm) 1.25rem; }
+.am-msg--guest .am-bubble { max-width: 30rem; padding: .7rem 1.2rem; background: var(--teal-deep); color: var(--paper); font-size: 1rem; border-radius: 1.25rem 1.25rem var(--radius-sm) 1.25rem; }
 .am-typing { display: inline-flex; gap: .3rem; padding-block: .45rem; }
 .am-typing i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--ink-soft); opacity: .35; animation: am-dot 1s var(--ease) infinite; }
 .am-typing i:nth-child(2) { animation-delay: .15s; }
@@ -517,9 +519,9 @@ html.motion .founder-copy blockquote.steep.is-steeped { background-size: 2px 100
 /* The send button rests a shade lighter while the field is empty, and comes up to full teal as you type:
    it says when there is something to send. */
 .composer-send img { transition: transform 450ms var(--ease-out); }
-.composer:has(input:placeholder-shown) .composer-send { background: color-mix(in srgb, var(--teal-deep) 50%, var(--paper)); }
+.composer:has(input:placeholder-shown) .composer-send { background: color-mix(in srgb, var(--teal-deep) 72%, var(--paper)); } /* white arrow stays ≥3:1 (WCAG 1.4.11) */
 .composer:has(input:placeholder-shown) .composer-send img { transform: translateY(.15rem); }
-.composer:has(input:placeholder-shown) .composer-send:hover { background: color-mix(in srgb, var(--teal-deep) 65%, var(--paper)); }
+.composer:has(input:placeholder-shown) .composer-send:hover { background: color-mix(in srgb, var(--teal-deep) 85%, var(--paper)); }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-drift i, .host-column > *, .host-window, [data-deal].is-dealt > li { animation: none; }
