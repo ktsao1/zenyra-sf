@@ -58,6 +58,8 @@ The hero window casts a shadow while it peeks in tipped back, fading to none as 
 - **Primary button** → teal-deep pill. **Ghost button** → transparent pill, silver border, ink text; on hover it fills with the *other* surface (`--ghost-hover`): white on cream bands, cream on white cards.
 - **Card** → white, 16px radius, `--card-pad` padding, level-1 shadow, no border; headings Inter 500 at `clamp(1.3rem, 1.8vw, 1.5rem)` (the advisor card's is the one larger exception).
 - **Header** → white and flat at the top; once the page scrolls it floats on `--shadow-1` (`.is-scrolled`, set in `main.js`). Wordmark in Inter 500, ink, wide tracking. Sticky is kept (deviation from Alden) so "Book" is always reachable, phones included: under 36rem the button shortens to "Book"/"预约", Menu becomes a two-line icon that crosses into a close mark (its label stays for screen readers), and under 24rem the wordmark drops beside the logo. Touch targets in the header are 44px.
+- **Trust row** (`.trust-row`) → a centred line of 2–3 confirmed facts under a primary CTA, separated by small dots (dots drop on phones); a price in it takes teal-deep 600. Only confirmed facts: never payment or cancellation terms until the client confirms them.
+- **First-visit steps** (`.first-visit`) → three numbered steps on the begin band, each led by a photo of the real place, flat on the cream (elevation 0, they're content). **Card note** (`.card-note`) → one small ink-soft line under a card's button saying what the next step involves.
 - **Section heads** → serif headline, short lede (centred or left with the column); no kicker on the new home.
 - **No featured tier** (the "Most popular" flag was removed 2026-11-04; no plan is singled out). **Start tier** → 1px teal outline.
 

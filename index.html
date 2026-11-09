@@ -16,9 +16,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=15">
-  <link rel="stylesheet" href="home-host.css?v=17">
+  <link rel="stylesheet" href="home-host.css?v=18">
   <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
-  <script src="i18n.js?v=15"></script>
+  <script src="i18n.js?v=16"></script>
   <script src="main.js?v=14" defer></script>
   <script src="home-host.js?v=15" defer></script>
 </head>
@@ -69,6 +69,13 @@
           <a class="button" href="#begin" data-i18n="cta.bookFirst">Book your first visit</a>
           <a class="button button--ghost" href="#services" data-i18n="host.heroServices">See our services</a>
         </div>
+        <!-- Price and reassurance right under the buttons (Mobbin research, 2026-11-09: the leaders state the entry
+             price in the hero and answer the last doubt under the CTA). Confirmed facts only. -->
+        <ul class="trust-row" aria-label="At a glance" data-i18n-aria="host.trustLabel">
+          <li><strong>$29</strong> <span data-i18n="host.trustPrice">first visit</span></li>
+          <li data-i18n="host.trustNoMember">No membership needed</li>
+          <li data-i18n="host.trustHours">Open daily 9 AM–9 PM</li>
+        </ul>
       </div>
       <!-- The window: tilted back and small while it peeks in, it straightens and widens to the full screen as
            the visitor scrolls into the studio (home-host.js writes --p, 0 → 1). -->
@@ -118,6 +125,7 @@
               <p data-i18n="host.bookBody">Choose a service and a time online. A first visit is $29 for two smart-equipment sessions.</p>
             </div>
             <a class="button" href="https://zenyra-book.mase.cloud/" target="_blank" rel="noopener" data-book data-i18n="host.bookOnline">Book online</a>
+            <p class="card-note" data-i18n="host.bookSteps">Choose a service, pick a time, confirm. No membership needed.</p>
           </div>
 
           <div class="begin-card" data-tilt>
@@ -130,6 +138,33 @@
               <span><span data-i18n="host.call">Call</span> (415) 712-4366</span>
             </a>
           </div>
+        </div>
+
+        <!-- Your first visit · what happens after you choose a way in, on the same band (Mobbin research,
+             2026-11-09: every wellness leader de-risks the first visit with three visible steps, each shown with a
+             piece of the real place). Only confirmed facts: the $29 Rhythm Explorer and joining by phone or in person. -->
+        <div class="first-visit" aria-labelledby="first-visit-title">
+          <h3 id="first-visit-title" class="first-visit-title" data-i18n="host.fvTitle">Your first visit, step by step</h3>
+          <ol class="first-visit-steps">
+            <li>
+              <img src="assets/images/reception-area-800.webp" srcset="assets/images/reception-area-800.webp 800w, assets/images/reception-area-1200.webp 1200w" sizes="(max-width: 52rem) 100vw, 33vw" alt="Zenyra’s front room, with the reception desk at the back" data-i18n-alt="host.fv1Alt" width="1477" height="1108" loading="lazy" decoding="async">
+              <p class="first-visit-num">01</p>
+              <h4 data-i18n="host.fv1Title">Book your way</h4>
+              <p data-i18n="host.fv1Body">Ask the advisor, book online, or call. Whichever suits you.</p>
+            </li>
+            <li>
+              <img src="assets/images/wellness-capsule-detail-800.webp" srcset="assets/images/wellness-capsule-detail-800.webp 800w, assets/images/wellness-capsule-detail-1200.webp 1200w" sizes="(max-width: 52rem) 100vw, 33vw" alt="The Energy 360 wellness capsule: a cushioned bed under a white warming arch" data-i18n-alt="host.capsuleAlt" width="1477" height="1108" loading="lazy" decoding="async">
+              <p class="first-visit-num">02</p>
+              <h4 data-i18n="host.fv2Title">Try it for $29</h4>
+              <p data-i18n="host.fv2Body">Your first visit, the Rhythm Explorer, is two smart-equipment sessions for $29.</p>
+            </li>
+            <li>
+              <img src="assets/images/treatment-room-soft-800.webp" srcset="assets/images/treatment-room-soft-800.webp 800w, assets/images/treatment-room-soft-1200.webp 1200w" sizes="(max-width: 52rem) 100vw, 33vw" alt="A softly lit private treatment room with a draped canopy" data-i18n-alt="home.sigAlt" width="1500" height="2000" loading="lazy" decoding="async">
+              <p class="first-visit-num">03</p>
+              <h4 data-i18n="host.fv3Title">Come back with a plan</h4>
+              <p data-i18n="host.fv3Body">If you’d like to keep coming, we’ll walk you through the plans by phone or at the studio. No online sign-up.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -204,7 +239,7 @@
           <li class="tier" data-tilt>
             <p class="tier-num">02 · <span data-i18n="tier.2.stage">Build familiarity</span></p>
             <h3 data-i18n="tier.2.name">Rhythm Insider</h3>
-            <div class="tier-prices"><p><strong>$199</strong><span data-i18n="tier.2.opt">7 smart-equipment visits</span></p></div>
+            <div class="tier-prices"><p><strong>$199</strong><span data-i18n="tier.2.opt">7 smart-equipment visits</span></p><p class="tier-per" data-i18n="tier.2.per">About $28 a visit</p></div>
             <p class="tier-rule" data-i18n="tier.2.rule">Smart equipment only. One-time purchase per person.</p>
           </li>
           <li class="tier" data-tilt>
@@ -274,8 +309,11 @@
             <a class="button button--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=2560+Noriega+St%2C+San+Francisco%2C+CA+94122" target="_blank" rel="noopener" data-i18n="cta.directions">Get directions</a>
           </div>
         </div>
+        <!-- The real door, so a passer-by on Noriega St recognises it (Mobbin research, 2026-11-09: single-location
+             studios show their entrance). The sign reads 悠然美, so the caption tells English speakers what to look for. -->
         <figure class="host-visit-photo" data-reveal>
-          <img src="assets/images/retail-and-community-space.webp" srcset="assets/images/retail-and-community-space-800.webp 800w, assets/images/retail-and-community-space-1200.webp 1200w, assets/images/retail-and-community-space.webp 2000w" sizes="(max-width: 52rem) 100vw, 560px" alt="Zenyra’s front room: shelves of wellness products beside the glowing butterfly wall" data-i18n-alt="host.studioAlt" width="2000" height="1500" loading="lazy">
+          <img src="assets/images/storefront-800.webp" srcset="assets/images/storefront-800.webp 800w, assets/images/storefront-1200.webp 1200w, assets/images/storefront.webp 1500w" sizes="(max-width: 52rem) 100vw, 560px" alt="Zenyra’s entrance on Noriega Street, under a green sign reading 悠然美" data-i18n-alt="host.doorAlt" width="1500" height="2000" loading="lazy">
+          <figcaption data-i18n="host.doorCap">Look for the green 悠然美 sign above the door.</figcaption>
         </figure>
       </div>
     </section>

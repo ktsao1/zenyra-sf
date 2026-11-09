@@ -127,6 +127,7 @@ html.motion .host-hero { --p: 0; }
 .host-column > :nth-child(2) { animation-delay: 180ms; }
 .host-column > :nth-child(3) { animation-delay: 340ms; }
 .host-column > :nth-child(4) { animation-delay: 480ms; }
+.host-column > :nth-child(5) { animation-delay: 600ms; }
 .host-window { animation: window-in 1400ms var(--ease-out) 520ms backwards; }
 
 /* The drift answers the pointer a little, so the room feels like it has air in it. */
@@ -217,6 +218,28 @@ html[lang="zh-Hans"] :is(.begin-card, .plan-grid .tier) h3 { letter-spacing: 0; 
 .composer-send:hover { background: var(--teal-night); }
 
 .host-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+/* Under the "Book online" button: what booking takes, so the hand-off to the booking site holds no surprise. */
+.card-note { margin-top: -.25rem; font-size: .875rem; line-height: 1.5; color: var(--ink-soft); }
+
+/* ---------- Your first visit: three steps on the begin band, each led by a photo of the real place. Content, not
+   actions, so they sit flat on the cream (elevation 0, DESIGN.md). ---------- */
+.first-visit { margin-top: clamp(3.5rem, 7vw, 5.5rem); padding-top: clamp(2.5rem, 5vw, 3.5rem); border-top: 1px solid var(--line-strong); }
+.first-visit-title { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); font-family: var(--font-serif); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 400; letter-spacing: -.02em; line-height: 1.2; }
+.first-visit-steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.first-visit-steps li { display: grid; gap: .5rem; align-content: start; }
+.first-visit-steps img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-image); margin-bottom: .75rem; }
+.first-visit-num { font-size: .8rem; font-weight: 600; letter-spacing: .08em; color: var(--teal-deep); }
+.first-visit-steps h4 { margin: 0; font-size: clamp(1.15rem, 1.6vw, 1.3rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.3; }
+.first-visit-steps li > p:last-child { color: var(--ink-soft); line-height: 1.55; text-wrap: pretty; }
+@media (max-width: 52rem) { .first-visit-steps { grid-template-columns: minmax(0, 1fr); } .first-visit-steps img { aspect-ratio: 16 / 9; } }
+
+/* ---------- Trust row under the hero buttons: the $29 price and two reassurances, separated by small dots. ---------- */
+.trust-row { margin: .25rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.25rem; font-size: .95rem; color: var(--ink-soft); }
+.trust-row li { display: inline-flex; align-items: baseline; gap: .3rem; }
+.trust-row li + li::before { content: ""; width: 4px; height: 4px; margin-right: .95rem; border-radius: 50%; background: var(--line-strong); align-self: center; }
+.trust-row strong { font-weight: 600; color: var(--teal-deep); }
+/* On a phone the row wraps; drop the dots so no line starts with one. */
+@media (max-width: 36rem) { .trust-row { gap: .25rem 1rem; } .trust-row li + li::before { display: none; } }
 .host-chips button {
   min-height: 2.75rem; padding: 0 1rem;
   border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--paper);
@@ -242,6 +265,8 @@ html[lang="zh-Hans"] :is(.begin-card, .plan-grid .tier) h3 { letter-spacing: 0; 
 .plan-grid .tier-prices { align-content: start; }
 .plan-grid .tier-top { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem .75rem; }
 .plan-grid .tier > .tier-rule { color: var(--ink-soft); }
+/* The price recast per visit (arithmetic from the confirmed price only, e.g. $199 / 7). */
+.tier-prices .tier-per { margin-top: -.35rem; font-size: .875rem; font-weight: 500; color: var(--teal-deep); }
 @media (max-width: 68rem) { .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 36rem) { .plan-grid { grid-template-columns: minmax(0, 1fr); } }
 /* The higher tiers: one white card you open (level 1, it acts), a plus that turns into a close mark. */
@@ -358,6 +383,9 @@ html[lang="zh-Hans"] .tier-more li strong { letter-spacing: 0; }
 .host-visit { padding-block: var(--section); background: var(--cream); }
 .host-visit-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
 .host-visit-photo img { width: 100%; aspect-ratio: 7 / 6; object-fit: cover; border-radius: var(--radius-image); }
+/* The storefront is portrait: keep the sign and the open door in the landscape crop. */
+.host-visit-photo img[src*="storefront"] { object-position: 50% 30%; }
+.host-visit-photo figcaption { margin-top: .75rem; font-size: .9rem; color: var(--ink-soft); }
 
 /* ---------- Footer: logo and line stacked, nav at right. ---------- */
 .host-footer { padding-block: 4rem; } /* Visit's cream band ends the page; the colour change is the edge. */
